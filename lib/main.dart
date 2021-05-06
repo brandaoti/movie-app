@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/shared/repository/api/repository_api.dart';
 
 import 'app/app_widget.dart';
+import 'app/shared/repository/api/repository_api.dart';
 
 void main() {
   final request = RepositoryApi();

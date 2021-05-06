@@ -1,5 +1,5 @@
-import 'package:movie_app/app/pages/movie/movie_model.dart';
-import 'package:movie_app/app/shared/models/movie.dart';
+import '../../shared/models/movie.dart';
+import 'movie_model.dart';
 
 class MovieController {
   final movieModel = MovieModel();

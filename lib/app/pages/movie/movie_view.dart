@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/pages/detail/detail_view.dart';
-import 'package:movie_app/app/pages/movie/movie_controller.dart';
-import 'package:movie_app/app/shared/components/movie_card_component.dart';
 
-import '../home_page.dart';
+import '../../shared/components/movie_card_component.dart';
+import '../detail/detail_view.dart';
+import 'movie_controller.dart';
 
 class MovieView extends StatefulWidget {
   MovieView({Key key}) : super(key: key);
