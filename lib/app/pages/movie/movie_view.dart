@@ -33,12 +33,45 @@ class _MovieViewState extends State<MovieView> {
             case ConnectionState.none:
 
             case ConnectionState.waiting:
-              return Center(
-                child: CircularProgressIndicator(),
+
+              // todo, refatorar esse widget com uma tela de carregamento
+              return Container(
+                height: 200,
+                // width: MediaQuery.of(context).size.width * .3,
+                // color: Colors.red,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text('Carregando dados...', textScaleFactor: 1.5),
+                      CircularProgressIndicator(),
+                    ],
+                  ),
+                ),
               );
             default:
+              // * chamada de erro
+              // todo, refatorar esse widget com uma tela de carregamento
               if (snapshot.hasError) {
-                return Text('Error');
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Erro ao carregar filmes! Tente novamente.',
+                        textScaleFactor: 1.5,
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.refresh),
+                        onPressed: () {
+                          setState(() {
+                            movieController.loadMovie();
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                );
               } else {
                 return Container(
                   height: 280,
