@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/app/pages/movie/movie_controller.dart';
+import 'package:movie_app/app/shared/components/movie_card_component.dart';
 
 import '../home_page.dart';
 
@@ -50,7 +51,7 @@ class _MovieViewState extends State<MovieView> {
                     itemBuilder: (context, index) {
                       var movie = snapshot.data[index];
 
-                      return MoviePosterComponent(
+                      return MovieCardComponent(
                         posterPath: 'https://image.tmdb.org/t/p/w300' +
                             movie.posterPath,
                       );
