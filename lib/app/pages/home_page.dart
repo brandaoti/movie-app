@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text('Movie APP'),
+        title: Text('Cubos Academy - Movie APP'),
       ),
       body: Column(
         children: [
