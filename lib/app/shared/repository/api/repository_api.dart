@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import '../../models/movie.dart';
+
 class RepositoryApi {
   // ? variaveis baseURL
   final String authority = 'api.themoviedb.org';
@@ -11,17 +13,20 @@ class RepositoryApi {
   };
 
   // Método para fazer requisição
-  Future fetchMovie() async {
-    final response = await http.get(Uri.https(
+  Future<List<Movie>> fetchMovie() async {
+    final request = await http.get(Uri.https(
       authority,
       path,
       queryParameters,
     ));
 
-    if (response.statusCode == 500) {
-      final responseJson = jsonDecode(response.body);
+    if (request.statusCode == 200) {
+      final requestJson = jsonDecode(request.body);
+      Iterable response = requestJson["results"];
+      print(response);
 
-      return responseJson;
+      return response.map((movie) => Movie.fromJson(movie)).toList();
+      //
     } else {
       throw Exception('Erro na solicitação!');
     }
