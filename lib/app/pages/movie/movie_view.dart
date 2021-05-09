@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/app/shared/components/loading_progress_component.dart';
 
 import '../../shared/components/movie_card_component.dart';
 import '../detail/detail_view.dart';
@@ -32,46 +33,20 @@ class _MovieViewState extends State<MovieView> {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
 
+            // * chamada de espera
             case ConnectionState.waiting:
+              return LoadingCircularIndicator();
 
-              // todo, refatorar esse widget com uma tela de carregamento
-              return Container(
-                height: 200,
-                // width: MediaQuery.of(context).size.width * .3,
-                // color: Colors.red,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text('Carregando dados...', textScaleFactor: 1.5),
-                      CircularProgressIndicator(),
-                    ],
-                  ),
-                ),
-              );
             default:
               // * chamada de erro
-              // todo, refatorar esse widget com uma tela de carregamento
               if (snapshot.hasError) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Erro ao carregar filmes! Tente novamente.',
-                        textScaleFactor: 1.5,
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.refresh),
-                        onPressed: () {
-                          setState(() {
-                            movieController.loadMovie();
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                );
+                return LoadingErrorComponent(onPressed: () {
+                  setState(() {
+                    movieController.loadMovie();
+                  });
+                });
+
+                // * chamada da construção do layout com retorno da api
               } else {
                 return Container(
                   height: 280,
