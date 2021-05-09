@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/app/shared/components/loading_progress_component.dart';
 
 import '../../shared/components/movie_card_component.dart';
 import '../detail/detail_view.dart';
@@ -32,13 +33,20 @@ class _MovieViewState extends State<MovieView> {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
 
+            // * chamada de espera
             case ConnectionState.waiting:
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return LoadingCircularIndicator();
+
             default:
+              // * chamada de erro
               if (snapshot.hasError) {
-                return Text('Error');
+                return LoadingErrorComponent(onPressed: () {
+                  setState(() {
+                    movieController.loadMovie();
+                  });
+                });
+
+                // * chamada da construção do layout com retorno da api
               } else {
                 return Container(
                   height: 280,
