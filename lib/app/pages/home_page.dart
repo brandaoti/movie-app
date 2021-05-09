@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/app/shared/components/loading_progress_component.dart';
 
 import 'movie/movie_view.dart';
 
@@ -16,6 +17,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           MovieView(),
+          // LoadingCircularIndicator(),
         ],
       ),
     );

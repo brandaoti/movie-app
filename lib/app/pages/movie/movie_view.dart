@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/app/shared/components/loading_progress_component.dart';
 
 import '../../shared/components/movie_card_component.dart';
 import '../detail/detail_view.dart';
@@ -35,20 +36,9 @@ class _MovieViewState extends State<MovieView> {
             case ConnectionState.waiting:
 
               // todo, refatorar esse widget com uma tela de carregamento
-              return Container(
-                height: 200,
-                // width: MediaQuery.of(context).size.width * .3,
-                // color: Colors.red,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text('Carregando dados...', textScaleFactor: 1.5),
-                      CircularProgressIndicator(),
-                    ],
-                  ),
-                ),
-              );
+              return LoadingCircularIndicator();
+
+              break;
             default:
               // * chamada de erro
               // todo, refatorar esse widget com uma tela de carregamento
