@@ -22,14 +22,14 @@ class MovieCardComponent extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.white.withOpacity(.6),
+            color: Colors.black.withOpacity(.5),
             image: DecorationImage(
               image: NetworkImage(posterPath),
               fit: BoxFit.cover,
             ),
             boxShadow: [
               BoxShadow(
-                  color: Colors.black.withOpacity(.8),
+                  color: Colors.white.withOpacity(.5),
                   blurRadius: 3,
                   spreadRadius: 3,
                   offset: Offset(0, 0)),
