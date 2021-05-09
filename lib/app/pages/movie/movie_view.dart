@@ -33,35 +33,20 @@ class _MovieViewState extends State<MovieView> {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
 
+            // * chamada de espera
             case ConnectionState.waiting:
-
-              // todo, refatorar esse widget com uma tela de carregamento
               return LoadingCircularIndicator();
 
-              break;
             default:
               // * chamada de erro
-              // todo, refatorar esse widget com uma tela de carregamento
               if (snapshot.hasError) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Erro ao carregar filmes! Tente novamente.',
-                        textScaleFactor: 1.5,
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.refresh),
-                        onPressed: () {
-                          setState(() {
-                            movieController.loadMovie();
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                );
+                return LoadingErrorComponent(onPressed: () {
+                  setState(() {
+                    movieController.loadMovie();
+                  });
+                });
+
+                // * chamada da construção do layout com retorno da api
               } else {
                 return Container(
                   height: 280,
