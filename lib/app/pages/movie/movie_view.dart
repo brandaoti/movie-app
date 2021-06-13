@@ -27,11 +27,11 @@ class _MovieViewState extends State<MovieView> {
 
     return Container(
       // height: 500,
-      child: FutureBuilder(
-        future: movieController.movie,
+      child: StreamBuilder(
+        stream: movieController.stream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
-            case ConnectionState.none:
+            case ConnectionState.done:
 
             // * chamada de espera
             case ConnectionState.waiting:
@@ -52,16 +52,16 @@ class _MovieViewState extends State<MovieView> {
                   height: 280,
                   width: size.width,
                   margin: EdgeInsets.symmetric(vertical: 8.0),
-                  // //color: Colors.red, // Remover
+                  //color: Colors.red, // Remover
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
                       var movie = snapshot.data[index];
+                      // movieController.loadMovie();
 
                       return MovieCardComponent(
-                        posterPath: 'https://image.tmdb.org/t/p/w300' +
-                            movie.posterPath,
+                        posterPath: 'https://image.tmdb.org/t/p/w300' + movie.posterPath,
                         onTap: () {
                           Navigator.push(
                             context,

@@ -7,7 +7,7 @@ class MovieModel {
 
   MovieModel({this.repositoryApi = const RepositoryApi()});
 
-  getMovie() {
-    movies = repositoryApi.fetchMovie();
+  Future<List<Movie>> getMovie() {
+    return movies = repositoryApi.fetchMovie();
   }
 }
