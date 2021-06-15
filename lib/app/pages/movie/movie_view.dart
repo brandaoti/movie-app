@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/shared/components/loading_progress_component.dart';
+import 'package:movie_app/app/shared/components/loadings/loading_progress_component.dart';
 
-import '../../shared/components/movie_card_component.dart';
+import '../../shared/components/cards/movie_card_component.dart';
 import '../detail/detail_view.dart';
 import 'movie_controller.dart';
 
