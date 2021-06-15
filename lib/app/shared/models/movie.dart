@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class Movie {
   // * Guardar os dados do mapeamento da api
+
+  final int id;
   final String title;
   final String posterPath;
   final String releaseDate;
@@ -12,6 +14,7 @@ class Movie {
   final int voteCount;
 
   Movie({
+    this.id,
     this.backdropPath,
     this.overview,
     this.popularity,
@@ -24,6 +27,7 @@ class Movie {
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
+      id: json['id'],
       title: json["title"],
       posterPath: json["poster_path"],
       releaseDate: json["release_date"],
