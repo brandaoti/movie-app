@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import '../../shared/models/movie.dart';
+import 'package:movie_app/app/shared/models/movie_response.dart';
 import 'movie_model.dart';
 
 class MovieController {
-  final movieModel = MovieModel();
+  final _model = MovieModel();
 
-  StreamController<List<Movie>> _streamController = StreamController();
+  StreamController<MovieResponse> _streamController = StreamController();
 
   get stream => _streamController.stream;
 
@@ -15,7 +15,10 @@ class MovieController {
   // }
 
   loadMovie() {
-    movieModel.getMovie().then((value) {
+    // _model.movies.then((value) {
+    //   _streamController.add(value);
+    // });
+    _model.getMovie().then((value) {
       _streamController.add(value);
     });
   }

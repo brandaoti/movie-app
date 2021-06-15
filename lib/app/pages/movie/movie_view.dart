@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/app/shared/components/loadings/loading_progress_component.dart';
+import 'package:movie_app/app/shared/models/movie_response.dart';
 
 import '../../shared/components/cards/movie_card_component.dart';
 import '../detail/detail_view.dart';
@@ -27,9 +28,9 @@ class _MovieViewState extends State<MovieView> {
 
     return Container(
       // height: 500,
-      child: StreamBuilder(
+      child: StreamBuilder<MovieResponse>(
         stream: movieController.stream,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<MovieResponse> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
 
@@ -55,9 +56,9 @@ class _MovieViewState extends State<MovieView> {
                   //color: Colors.red, // Remover
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data.length,
+                    itemCount: snapshot.data.movies.length,
                     itemBuilder: (context, index) {
-                      var movie = snapshot.data[index];
+                      var movie = snapshot.data.movies[index];
                       // movieController.loadMovie();
 
                       return MovieCardComponent(
