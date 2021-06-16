@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/app/shared/components/loadings/loading_progress_component.dart';
 import 'package:movie_app/app/shared/models/movie.dart';
 import 'package:movie_app/app/shared/models/movie_response.dart';
+import 'package:movie_app/app/shared/routes/app_routes.dart';
 
 import '../../shared/components/cards/movie_card_component.dart';
 import '../detail/detail_view.dart';
@@ -71,11 +72,10 @@ class _MovieViewState extends State<MovieView> {
                             : 'https://raw.githubusercontent.com/brandaoti/image-repository/main/image-unavailable.png',
                         // instanciar nova foto
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => MovieDetailsView(movie),
-                            ),
+                            AppRoutes.MOVIE_DETAIL,
+                            arguments: movie,
                           );
                         },
                       );

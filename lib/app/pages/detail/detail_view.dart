@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import '../../shared/models/movie.dart';
 
 class MovieDetailsView extends StatelessWidget {
-  final Movie movie;
+  // final Movie movie;
 
-  const MovieDetailsView(this.movie, {Key key}) : super(key: key);
+  const MovieDetailsView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
+    final movie = ModalRoute.of(context).settings.arguments as Movie;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(movie.title) != null ? Text(movie.title) : '',
+        title: Text(movie.title != null ? Text(movie.title) : ''),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
