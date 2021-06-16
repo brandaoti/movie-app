@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'package:movie_app/app/shared/models/movie_response.dart';
 
 import '../../models/movie.dart';
 
@@ -10,27 +12,23 @@ class RepositoryApi {
   // ? variaveis baseURL
   final String _authority = 'api.themoviedb.org';
   final String _path = '/3/movie/upcoming';
-  static Map<String, dynamic> _queryParameters = {
-    'api_key': 'a5bc05fb630c9b7fdc560033345fa13e',
-  };
+  final String _apiKey = 'a5bc05fb630c9b7fdc560033345fa13e';
 
   // Método para fazer requisição
-  Future<List<Movie>> fetchMovie() async {
-    final request = await http.get(Uri.https(
-      _authority,
-      _path,
-      _queryParameters,
-    ));
+  Future<MovieResponse> fetchMovie(int page) async {
+    var params = {
+      'api_key': _apiKey,
+      'page': '$page',
+    };
 
-    if (request.statusCode == 200) {
-      final requestJson = jsonDecode(request.body);
-      Iterable response = requestJson["results"];
-      print(response);
+    final response = await http.get(Uri.http(_authority, _path, params));
 
-      return response.map((movie) => Movie.fromJson(movie)).toList();
-      //
+    if (response.statusCode == 200) {
+      var responseJson = jsonDecode(response.body);
+      print(responseJson);
+      return MovieResponse.fromJson(responseJson);
     } else {
-      throw Exception('Erro na solicitação!');
+      return throw 'Erro no retorno da api';
     }
   }
 }

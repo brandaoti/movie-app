@@ -1,13 +1,13 @@
-import '../../shared/models/movie.dart';
+import 'package:movie_app/app/shared/models/movie_response.dart';
 import '../../shared/repository/api/repository_api.dart';
 
 class MovieModel {
   final RepositoryApi repositoryApi;
-  Future<List<Movie>> movies;
+  Future<MovieResponse> movies; // Variavel para Unit test
 
   MovieModel({this.repositoryApi = const RepositoryApi()});
 
-  Future<List<Movie>> getMovie() {
-    return movies = repositoryApi.fetchMovie();
+  Future<MovieResponse> getMovie(int page) {
+    return movies = repositoryApi.fetchMovie(page);
   }
 }

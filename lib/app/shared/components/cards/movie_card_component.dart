@@ -25,7 +25,7 @@ class MovieCardComponent extends StatelessWidget {
             color: Colors.black.withOpacity(.5),
             image: DecorationImage(
               image: NetworkImage(posterPath),
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
             boxShadow: [
               BoxShadow(
