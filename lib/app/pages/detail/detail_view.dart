@@ -12,7 +12,7 @@ class MovieDetailsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(movie.title),
+        title: Text(movie.title) != null ? Text(movie.title) : '',
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
@@ -29,7 +29,10 @@ class MovieDetailsView extends StatelessWidget {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                      'https://image.tmdb.org/t/p/w300' + movie.backdropPath,
+                      movie.backdropPath != null
+                          ? 'https://image.tmdb.org/t/p/w300' + movie.posterPath
+                          : 'https://raw.githubusercontent.com/brandaoti/image-repository/main/image-unavailable.png',
+                      // Instanciar nova foto
                     )),
               ),
               // * Container para add um gradient/efeito
@@ -71,37 +74,6 @@ class MovieDetailsView extends StatelessWidget {
                     Text('Lançamento'),
                     Text(movie.releaseDate),
                   ]),
-                ),
-
-                // * Componentizar container
-                //TODO, fazer refatoração usando components de container
-                Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 16.0), // todo, verificar
-                      margin: EdgeInsets.only(left: 12.0, right: 8.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[800], // todo, verificar
-                        border: Border.all(color: Colors.grey.withOpacity(.6)),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Text('coming soon'),
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 16.0), // todo, verificar
-                      margin: EdgeInsets.only(left: 12.0, right: 8.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[800], // todo, verificar
-                        border: Border.all(color: Colors.grey.withOpacity(.6)),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Text('coming soon'),
-                    ),
-                  ],
                 ),
               ],
             ),
