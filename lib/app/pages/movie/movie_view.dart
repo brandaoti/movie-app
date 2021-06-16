@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/app/shared/components/loadings/loading_progress_component.dart';
+import 'package:movie_app/app/shared/models/movie.dart';
 import 'package:movie_app/app/shared/models/movie_response.dart';
 
 import '../../shared/components/cards/movie_card_component.dart';
 import '../detail/detail_view.dart';
-import 'movie_controller.dart';
+import 'movie_view_model.dart';
 
 class MovieView extends StatefulWidget {
   MovieView({Key key}) : super(key: key);
@@ -14,12 +15,12 @@ class MovieView extends StatefulWidget {
 }
 
 class _MovieViewState extends State<MovieView> {
-  final movieController = MovieController();
+  final _controller = ViewModel();
 
   @override
   void initState() {
     super.initState();
-    movieController.loadMovie();
+    _controller.loadMovie();
   }
 
   @override
@@ -28,9 +29,9 @@ class _MovieViewState extends State<MovieView> {
 
     return Container(
       // height: 500,
-      child: StreamBuilder<MovieResponse>(
-        stream: movieController.stream,
-        builder: (BuildContext context, AsyncSnapshot<MovieResponse> snapshot) {
+      child: StreamBuilder<List<Movie>>(
+        stream: _controller.stream,
+        builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
 
@@ -43,7 +44,7 @@ class _MovieViewState extends State<MovieView> {
               if (snapshot.hasError) {
                 return LoadingErrorComponent(onPressed: () {
                   setState(() {
-                    movieController.loadMovie();
+                    _controller.loadMovie();
                   });
                 });
 
@@ -56,13 +57,19 @@ class _MovieViewState extends State<MovieView> {
                   //color: Colors.red, // Remover
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data.movies.length,
+                    itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
-                      var movie = snapshot.data.movies[index];
-                      // movieController.loadMovie();
+                      var movie = snapshot.data[index];
+
+                      if (index == snapshot.data.length - 1) {
+                        _controller.nextPage();
+                      }
 
                       return MovieCardComponent(
-                        posterPath: 'https://image.tmdb.org/t/p/w300' + movie.posterPath,
+                        posterPath: movie.posterPath != null
+                            ? 'https://image.tmdb.org/t/p/w300' + movie.posterPath
+                            : 'https://raw.githubusercontent.com/brandaoti/image-repository/main/image-unavailable.png',
+                        // instanciar nova foto
                         onTap: () {
                           Navigator.push(
                             context,

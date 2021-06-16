@@ -15,10 +15,10 @@ class RepositoryApi {
   final String _apiKey = 'a5bc05fb630c9b7fdc560033345fa13e';
 
   // Método para fazer requisição
-  Future<MovieResponse> fetchMovie() async {
+  Future<MovieResponse> fetchMovie(int page) async {
     var params = {
       'api_key': _apiKey,
-      'page': '1',
+      'page': '$page',
     };
 
     final response = await http.get(Uri.http(_authority, _path, params));

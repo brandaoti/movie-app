@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/pages/movie/movie_controller.dart';
+import 'package:movie_app/app/pages/movie/movie_view_model.dart';
 import 'package:movie_app/app/shared/components/cards/back_slider_card_component.dart';
 import 'package:movie_app/app/shared/components/loadings/loading_progress_component.dart';
 import 'package:movie_app/app/shared/models/movie.dart';
@@ -14,7 +14,7 @@ class BackPosterSlider extends StatefulWidget {
 }
 
 class _BackPosterSliderState extends State<BackPosterSlider> {
-  final _controller = MovieController();
+  final _controller = ViewModel();
   final _pageController = PageController();
 
   @override
@@ -31,9 +31,9 @@ class _BackPosterSliderState extends State<BackPosterSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<MovieResponse>(
+    return StreamBuilder<List<Movie>>(
       stream: _controller.stream,
-      builder: (BuildContext context, AsyncSnapshot<MovieResponse> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
 
@@ -55,16 +55,16 @@ class _BackPosterSliderState extends State<BackPosterSlider> {
                   indicatorColor: Colors.white,
                   indicatorSelectorColor: Colors.red,
                   indicatorSpace: 12.0,
-                  length: snapshot.data.movies.take(5).length,
+                  length: snapshot.data.take(5).length,
                   shape: IndicatorShape.circle(size: 8.0),
                   padding: EdgeInsets.all(6.0),
                   //
                   child: PageView.builder(
                     scrollDirection: Axis.horizontal,
                     physics: ScrollPhysics(),
-                    itemCount: snapshot.data.movies.take(5).length,
+                    itemCount: snapshot.data.take(5).length,
                     itemBuilder: (context, index) {
-                      var movie = snapshot.data.movies[index];
+                      var movie = snapshot.data[index];
 
                       return BackPosterCardComponent(
                         backPoster: movie.backdropPath,
