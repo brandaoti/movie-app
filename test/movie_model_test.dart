@@ -8,8 +8,8 @@ void main() {
   test('FecthMovie, testa o valor da variavel movie', () {
     //
     final model = MovieModel(repositoryApi: MokeAPI());
-
-    model.getMovie();
+    final page = 0;
+    model.getMovie(page);
 
     expect(model.movies, completion(isNotNull));
 
@@ -21,7 +21,7 @@ void main() {
 
 class MokeAPI extends RepositoryApi {
   @override
-  Future<MovieResponse> fetchMovie() {
+  Future<MovieResponse> fetchMovie(page) {
     final temp = Movie(
       title: 'Mortal Kombat',
       posterPath: 'posterPath',
