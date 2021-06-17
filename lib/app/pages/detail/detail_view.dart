@@ -14,7 +14,7 @@ class MovieDetailsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(movie.title != null ? Text(movie.title) : ''),
+        title: movie.title != null ? Text(movie.title) : Text('Titulo não encontrado!'),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
