@@ -13,6 +13,7 @@ class MovieDetailsView extends StatelessWidget {
     bool isFavorite = false;
 
     bool onFavorite() {
+      print(isFavorite);
       return !isFavorite ? isFavorite = true : isFavorite = false;
     }
 
@@ -139,7 +140,7 @@ class MovieDetailsView extends StatelessWidget {
         elevation: 0,
         // backgroundColor: Colors.black12,
         child: Icon(
-          !isFavorite ? Icons.star_border : Icons.star,
+          !isFavorite == true ? Icons.star_border : Icons.star,
           size: 36.0,
           // color: Colors.deepOrange,
         ),
