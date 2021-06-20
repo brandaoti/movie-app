@@ -21,9 +21,16 @@ class ViewModel {
     });
   }
 
+  saveFavoriteMovie(String id) {
+    _model.saveMovie(id);
+  }
+
+  removeFavoriteMovie(String id) {
+    _model.removeMovie(id);
+  }
+
   nextPage() {
     _page++;
     loadMovie();
-    print(_page);
   }
 }

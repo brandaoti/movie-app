@@ -1,5 +1,7 @@
 abstract class InternalStorageAdapter {
-  void onSaveFavorite(int id);
+  void onSaveFavoriteMovie(String id);
 
-  void onRemoveFavorite(int id);
+  void onRemoveFavoriteMovie(String id);
+
+  void onFavorite();
 }

@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/app/pages/detail/movie_detail_view_model.dart';
 import '../../shared/models/movie.dart';
 
 class MovieDetailsView extends StatelessWidget {
-  // final Movie movie;
-
-  const MovieDetailsView({Key key}) : super(key: key);
+  final _viewModel = MovieDetailViewModel();
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-
-    bool isFavorite = false;
-
-    bool onFavorite() {
-      print(isFavorite);
-      return !isFavorite ? isFavorite = true : isFavorite = false;
-    }
 
     final movie = ModalRoute.of(context).settings.arguments as Movie;
 
@@ -97,16 +89,23 @@ class MovieDetailsView extends StatelessWidget {
 
                           // Divider(color: Colors.red),
                           Container(
-                            // color: Colors.black12,
-                            // height: 100,
                             width: MediaQuery.of(context).size.width * .6,
                             margin: EdgeInsets.only(left: 30.0),
                             child: Wrap(
-                              // crossAxisAlignment: WrapCrossAlignment.start,
                               spacing: 10.0,
                               children: [
                                 Text('Vote'),
-                                Text('Popularity'),
+                                StreamBuilder<Map<String, Movie>>(
+                                  stream: _viewModel.stream,
+                                  initialData: {},
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return Text('${snapshot.data.length}');
+                                    } else {
+                                      return CircularProgressIndicator();
+                                    }
+                                  },
+                                ),
                               ],
                             ),
                           ),
@@ -136,18 +135,26 @@ class MovieDetailsView extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 0,
-        // backgroundColor: Colors.black12,
-        child: Icon(
-          !isFavorite == true ? Icons.star_border : Icons.star,
-          size: 36.0,
-          // color: Colors.deepOrange,
-        ),
-        onPressed: () {
-          onFavorite();
-        },
-      ),
+      floatingActionButton: StreamBuilder<Map<String, Movie>>(
+          stream: _viewModel.stream,
+          initialData: {},
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return FloatingActionButton(
+                elevation: 0,
+                child: Icon(
+                  snapshot.data.containsKey(movie.id) ? Icons.star : Icons.star_border,
+                  size: 36.0,
+                  color: Colors.deepOrange,
+                ),
+                onPressed: () {
+                  _viewModel.toggleFavorite(movie);
+                },
+              );
+            } else {
+              return CircularProgressIndicator();
+            }
+          }),
     );
   }
 }

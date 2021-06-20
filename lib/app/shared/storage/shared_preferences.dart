@@ -4,12 +4,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPreferencesAdapter extends InternalStorageAdapter {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
+  List<String> favoriteMovies = [];
+  bool isFavorite = false;
+
   @override
-  void onSaveFavorite(int id) async {
+  void onSaveFavoriteMovie(String id) async {
     final internalPrefs = await _prefs;
-    internalPrefs.setInt('id', id);
+
+    favoriteMovies = internalPrefs.getStringList('favorites');
+
+    if (favoriteMovies == null) {
+      favoriteMovies = [];
+    }
+    favoriteMovies.add(id);
+
+    internalPrefs.setStringList('favorites', favoriteMovies);
+
+    print('ID $favoriteMovies');
   }
 
   @override
-  void onRemoveFavorite(int id) {}
+  void onRemoveFavoriteMovie(String id) async {
+    final internalPrefs = await _prefs;
+
+    // internalPrefs.getStringList(id);
+
+    favoriteMovies.remove(id);
+  }
+
+  @override
+  void onFavorite() {}
 }
