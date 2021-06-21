@@ -41,24 +41,24 @@ class MovieDetailsView extends StatelessWidget {
                 decoration: BoxDecoration(
                   // color: Colors.red,
                   image: DecorationImage(
-                    image: NetworkImage(movie.backdropPath),
+                    image: NetworkImage(movie.posterPath),
                     fit: BoxFit.fill,
                   ),
                 ),
                 // * Container para add um gradient/efeito
                 child: Container(
                   decoration: BoxDecoration(
-                      // gradient: LinearGradient(
-                      //     // colors: [
-                      //     //   Color(0xFF303030),
-                      //     //   // Color(0xFF303030).withOpacity(.5),
-                      //     //   Color(0xFF303030).withOpacity(.1),
-                      //     //   Colors.transparent,
-                      //     // ],
-                      //     // begin: Alignment.bottomCenter,
-                      //     // end: Alignment.topCenter,
-                      //     ),
-                      ),
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFF020024).withOpacity(0.0),
+                        Color(0xFF3f3e57).withOpacity(.1),
+                        Color(0xFF4E4C61).withOpacity(1),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: [0.0, 0.9, 1.0],
+                    ),
+                  ),
                 )),
 
             // nome, data, descrição
@@ -89,8 +89,8 @@ class MovieDetailsView extends StatelessWidget {
                                     padding: EdgeInsets.all(4.0),
                                     margin: EdgeInsets.only(right: 12.0),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      color: Colors.black.withOpacity(.5),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.red.withOpacity(.7),
                                     ),
                                     child: Column(
                                       children: [
@@ -119,8 +119,11 @@ class MovieDetailsView extends StatelessWidget {
 
                                 //
                                 Container(
-                                  color: Colors.black38,
                                   padding: EdgeInsets.all(4.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    color: Colors.red.withOpacity(.7),
+                                  ),
                                   child: Wrap(
                                     spacing: 10.0,
                                     children: [
@@ -168,22 +171,20 @@ class MovieDetailsView extends StatelessWidget {
                             ),
                           ),
                           Container(
-                              color: Colors.black38,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  // TODO, fazer formatação do texto
-                                  Text(
-                                    movie.overview == '' ? 'Não tem descrição' : movie.overview,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      letterSpacing: 1.5,
-                                      wordSpacing: 0.5,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                color: Colors.black.withOpacity(.05),
+                              ),
+                              child: Text(
+                                movie.overview,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  letterSpacing: 1.5,
+                                  wordSpacing: 0.5,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               )),
                         ],
                       ),
