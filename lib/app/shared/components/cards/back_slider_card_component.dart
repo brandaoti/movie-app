@@ -6,7 +6,7 @@ class BackPosterCardComponent extends StatelessWidget {
 
   const BackPosterCardComponent({
     Key key,
-    @required this.backPoster,
+    this.backPoster,
     this.title = 'Nenhum Titulo encontrado',
   }) : super(key: key);
 
@@ -18,7 +18,7 @@ class BackPosterCardComponent extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage('https://image.tmdb.org/t/p/w300' + backPoster),
+              image: NetworkImage(backPoster),
               fit: BoxFit.fill,
             ),
           ),
@@ -27,17 +27,18 @@ class BackPosterCardComponent extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.grey[700].withOpacity(1.0),
-                Colors.grey[700].withOpacity(0.0),
+                Color(0xFF020024).withOpacity(0.0),
+                Color(0xFF3f3e57).withOpacity(0.0),
+                Color(0xFF3f3e57).withOpacity(0.9),
               ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              stops: [0.0, 0.5],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [0.0, 0.95, 1.0],
             ),
           ),
         ),
         Positioned(
-          bottom: 30.0,
+          bottom: 40.0,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
@@ -45,7 +46,8 @@ class BackPosterCardComponent extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16.0,
-                fontWeight: FontWeight.w500,
+                letterSpacing: 1.5,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),

@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Cubos Academy'),
         centerTitle: true,
-        elevation: 20,
+        elevation: 0,
         brightness: Brightness.dark,
         // backgroundColor: Colors.transparent,
       ),

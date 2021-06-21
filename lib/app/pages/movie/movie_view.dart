@@ -68,7 +68,6 @@ class _MovieViewState extends State<MovieView> {
 
                       return MovieCardComponent(
                         posterPath: movie.posterPath,
-                        // instanciar nova foto
                         onTap: () {
                           Navigator.pushNamed(
                             context,
