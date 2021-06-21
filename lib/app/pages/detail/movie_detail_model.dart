@@ -6,7 +6,7 @@ class MovieDetailModel {
 
   Future<MovieDetail> movieDetail;
 
-  loadMovieDetail(int id) {
-    movieDetail = _repositoryApi.fetchMovieDetail(id);
+  Future<MovieDetail> getLoadMovieDetail(int id) {
+    return movieDetail = _repositoryApi.fetchMovieDetail(id);
   }
 }

@@ -6,7 +6,6 @@ import 'package:movie_app/app/shared/storage/shared_preferences.dart';
 import '../../shared/models/movie.dart';
 
 class MovieDetailsView extends StatelessWidget {
-  final _upcomingViewModel = ViewModel();
   final _detailViewModel = MovieDetailViewModel();
 
   @override
@@ -162,27 +161,27 @@ class MovieDetailsView extends StatelessWidget {
                                   ),
                                 ),
                                 // DATA
-                                StreamBuilder<Map<String, Movie>>(
-                                  stream: _detailViewModel.favStream,
-                                  // initialData: {},
-                                  builder: (context, AsyncSnapshot<Map<String, Movie>> snapshot) {
-                                    if (snapshot.hasData) {
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(4.0),
-                                          // color: Colors.red,
-                                        ),
-                                        child: TextButton.icon(
-                                          icon: Icon(Icons.favorite, color: Colors.red),
-                                          label: Text('${snapshot.data.length}'),
-                                          onPressed: () {},
-                                        ),
-                                      );
-                                    } else {
-                                      return CircularProgressIndicator();
-                                    }
-                                  },
-                                ),
+                                // StreamBuilder<Map<String, Movie>>(
+                                //   stream: _detailViewModel.favStream,
+                                //   // initialData: {},
+                                //   builder: (context, AsyncSnapshot<Map<String, Movie>> snapshot) {
+                                //     if (snapshot.hasData) {
+                                //       return Container(
+                                //         decoration: BoxDecoration(
+                                //           borderRadius: BorderRadius.circular(4.0),
+                                //           // color: Colors.red,
+                                //         ),
+                                //         child: TextButton.icon(
+                                //           icon: Icon(Icons.favorite, color: Colors.red),
+                                //           label: Text('${snapshot.data.length}'),
+                                //           onPressed: () {},
+                                //         ),
+                                //       );
+                                //     } else {
+                                //       return CircularProgressIndicator();
+                                //     }
+                                //   },
+                                // ),
                               ],
                             ),
                           ),
@@ -212,22 +211,19 @@ class MovieDetailsView extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: StreamBuilder<Map<String, Movie>>(
-          stream: _detailViewModel.favStream,
-          initialData: {},
-          builder: (context, AsyncSnapshot<Map<String, Movie>> snapshot) {
+      floatingActionButton: StreamBuilder<MovieDetail>(
+          stream: _detailViewModel.stream,
+          builder: (context, AsyncSnapshot<MovieDetail> snapshot) {
             if (snapshot.hasData) {
               return FloatingActionButton(
                 elevation: 0,
                 backgroundColor: Colors.white.withOpacity(.3),
                 child: Icon(
-                  snapshot.data.containsKey(movie.id) ? Icons.favorite : Icons.favorite_border,
+                  Icons.favorite,
                   size: 36.0,
                   color: Colors.red[800],
                 ),
-                onPressed: () {
-                  _detailViewModel.toggleFavorite(movie);
-                },
+                onPressed: () {},
               );
             } else {
               return CircularProgressIndicator();
