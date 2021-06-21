@@ -51,36 +51,50 @@ class _MovieViewState extends State<MovieView> {
 
                 // * chamada da construção do layout com retorno da api
               } else {
-                return Container(
-                  height: 280,
-                  width: size.width,
-                  margin: EdgeInsets.symmetric(vertical: 8.0),
-                  //color: Colors.red, // Remover
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      var movie = snapshot.data[index];
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, top: 16.0),
+                      child: Text(
+                        'Upcoming',
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 1.5,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 280,
+                      width: size.width,
+                      // margin: EdgeInsets.symmetric(vertical: 8.0),
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          var movie = snapshot.data[index];
 
-                      if (index == snapshot.data.length - 1) {
-                        _controller.nextPage();
-                      }
+                          if (index == snapshot.data.length - 1) {
+                            _controller.nextPage();
+                          }
 
-                      return MovieCardComponent(
-                        posterPath: movie.posterPath != null
-                            ? 'https://image.tmdb.org/t/p/w300' + movie.posterPath
-                            : 'https://raw.githubusercontent.com/brandaoti/image-repository/main/image-unavailable.png',
-                        // instanciar nova foto
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.MOVIE_DETAIL,
-                            arguments: movie,
+                          return MovieCardComponent(
+                            posterPath: movie.posterPath,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                AppRoutes.MOVIE_DETAIL,
+                                arguments: movie,
+                              );
+                            },
                           );
                         },
-                      );
-                    },
-                  ),
+                      ),
+                    ),
+                  ],
                 );
               }
           }

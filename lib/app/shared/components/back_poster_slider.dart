@@ -57,7 +57,7 @@ class _BackPosterSliderState extends State<BackPosterSlider> {
                   indicatorSpace: 12.0,
                   length: snapshot.data.take(5).length,
                   shape: IndicatorShape.circle(size: 8.0),
-                  padding: EdgeInsets.all(6.0),
+                  padding: EdgeInsets.all(12.0),
                   //
                   child: PageView.builder(
                     scrollDirection: Axis.horizontal,
