@@ -9,10 +9,6 @@ class MovieDetailsView extends StatelessWidget {
   final _upcomingViewModel = ViewModel();
   final _detailViewModel = MovieDetailViewModel();
 
-  final Movie id;
-
-  MovieDetailsView({Key key, this.id}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -168,7 +164,7 @@ class MovieDetailsView extends StatelessWidget {
                                 // DATA
                                 StreamBuilder<Map<String, Movie>>(
                                   stream: _detailViewModel.favStream,
-                                  initialData: {},
+                                  // initialData: {},
                                   builder: (context, AsyncSnapshot<Map<String, Movie>> snapshot) {
                                     if (snapshot.hasData) {
                                       return Container(

@@ -11,7 +11,7 @@ class MovieDetailViewModel {
 
   Stream<Map<String, Movie>> get favStream => _favoriteController.stream;
 
-  final _prefs = SharedPreferences.getInstance();
+  // final _prefs = SharedPreferences.getInstance();
 
   // MovieDetailViewModel() {
   //   SharedPreferences.getInstance().then((prefs) {
@@ -51,7 +51,7 @@ class MovieDetailViewModel {
   //   });
   // }
 
-  dispose() {
+  void dispose() {
     _favoriteController.close();
   }
 }
