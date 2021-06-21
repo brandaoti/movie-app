@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:movie_app/app/shared/models/movie_response.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'movie_model.dart';
 
 class ViewModel {
@@ -19,14 +21,6 @@ class ViewModel {
       movieList.addAll(value.movies);
       _streamController.add(movieList);
     });
-  }
-
-  saveFavoriteMovie(String id) {
-    _model.saveMovie(id);
-  }
-
-  removeFavoriteMovie(String id) {
-    _model.removeMovie(id);
   }
 
   nextPage() {

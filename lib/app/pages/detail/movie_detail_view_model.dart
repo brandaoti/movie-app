@@ -44,11 +44,11 @@ class MovieDetailViewModel {
     });
   }
 
-  // void _deleteFavorite(int id) async {
-  //   await SharedPreferences.getInstance().then((value) {
-  //     value.remove(id.toString());
-  //   });
-  // }
+  void _deleteFavorite(int id) async {
+    await SharedPreferences.getInstance().then((value) {
+      value.remove(id.toString());
+    });
+  }
 
   dispose() {
     _favoriteController.close();

@@ -1,7 +1,9 @@
+import 'package:movie_app/app/shared/models/movie.dart';
+
 abstract class InternalStorageAdapter {
-  void onSaveFavoriteMovie(String id);
+  void toggleFavorite(Movie movie);
 
-  void onRemoveFavoriteMovie(String id);
+  void saveFavorite(String id);
 
-  void onFavorite();
+  void removeFavorite(String id);
 }

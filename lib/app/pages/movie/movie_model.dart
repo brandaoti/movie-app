@@ -18,11 +18,11 @@ class MovieModel {
     return movies = repositoryApi.fetchMovie(page);
   }
 
-  saveMovie(String id) {
-    internalStorage.onSaveFavoriteMovie(id);
-  }
+  // saveMovie(String id) {
+  //   internalStorage.onSaveFavoriteMovie(id);
+  // }
 
-  removeMovie(String id) {
-    internalStorage.onRemoveFavoriteMovie(id);
-  }
+  // removeMovie(String id) {
+  //   internalStorage.onRemoveFavoriteMovie(id);
+  // }
 }

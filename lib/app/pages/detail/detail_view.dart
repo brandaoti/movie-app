@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/app/pages/detail/movie_detail_view_model.dart';
+import 'package:movie_app/app/shared/storage/shared_preferences.dart';
 import '../../shared/models/movie.dart';
 
 class MovieDetailsView extends StatelessWidget {
   final _viewModel = MovieDetailViewModel();
+  final _prefs = SharedPreferencesAdapter();
 
   @override
   Widget build(BuildContext context) {
