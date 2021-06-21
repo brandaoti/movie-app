@@ -12,6 +12,8 @@ class BackPosterCardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _size = MediaQuery.of(context).size;
+
     return Stack(
       children: [
         Container(
@@ -40,15 +42,17 @@ class BackPosterCardComponent extends StatelessWidget {
         Positioned(
           bottom: 40.0,
           child: Container(
+            width: _size.width,
             padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               title.toUpperCase(),
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16.0,
+                fontSize: 22.0,
                 letterSpacing: 1.5,
                 fontWeight: FontWeight.w600,
               ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
