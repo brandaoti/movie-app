@@ -39,7 +39,6 @@ class MovieDetailsView extends StatelessWidget {
                 height: 500,
                 width: size.width,
                 decoration: BoxDecoration(
-                  // color: Colors.red,
                   image: DecorationImage(
                     image: NetworkImage(movie.posterPath),
                     fit: BoxFit.fill,
@@ -71,12 +70,15 @@ class MovieDetailsView extends StatelessWidget {
                     children: [
                       Container(
                           width: size.width,
-                          // color: Colors.red,
-                          child: Text(movie.title,
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w600,
-                              ))),
+                          child: Text(
+                            movie.title,
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              color: Colors.white,
+                              letterSpacing: 1.5,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          )),
                       Column(
                         children: [
                           //!
@@ -120,6 +122,7 @@ class MovieDetailsView extends StatelessWidget {
                                 //
                                 Container(
                                   padding: EdgeInsets.all(4.0),
+                                  margin: EdgeInsets.only(right: 12.0),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8.0),
                                     color: Colors.red.withOpacity(.7),
@@ -151,21 +154,30 @@ class MovieDetailsView extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-
-                                      // DATA
-                                      // StreamBuilder<Map<String, Movie>>(
-                                      //   stream: _viewModel.stream,
-                                      //   initialData: {},
-                                      //   builder: (context, snapshot) {
-                                      //     if (snapshot.hasData) {
-                                      //       return Text('${snapshot.data.length}');
-                                      //     } else {
-                                      //       return CircularProgressIndicator();
-                                      //     }
-                                      //   },
-                                      // ),
                                     ],
                                   ),
+                                ),
+                                // DATA
+                                StreamBuilder<Map<String, Movie>>(
+                                  stream: _viewModel.stream,
+                                  initialData: {},
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(4.0),
+                                          // color: Colors.red,
+                                        ),
+                                        child: TextButton.icon(
+                                          icon: Icon(Icons.favorite, color: Colors.red),
+                                          label: Text('${snapshot.data.length}'),
+                                          onPressed: () {},
+                                        ),
+                                      );
+                                    } else {
+                                      return CircularProgressIndicator();
+                                    }
+                                  },
                                 ),
                               ],
                             ),
@@ -203,10 +215,11 @@ class MovieDetailsView extends StatelessWidget {
             if (snapshot.hasData) {
               return FloatingActionButton(
                 elevation: 0,
+                backgroundColor: Colors.white.withOpacity(.3),
                 child: Icon(
-                  snapshot.data.containsKey(movie.id) ? Icons.star : Icons.star_border,
+                  snapshot.data.containsKey(movie.id) ? Icons.favorite : Icons.favorite_border,
                   size: 36.0,
-                  color: Colors.deepOrange,
+                  color: Colors.red[800],
                 ),
                 onPressed: () {
                   _viewModel.toggleFavorite(movie);
