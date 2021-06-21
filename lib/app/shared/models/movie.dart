@@ -38,7 +38,7 @@ class Movie {
         backdropPath:
             json["backdrop_path"] != null ? firstPath + json["backdrop_path"] : pathNotFound,
         releaseDate: json["release_date"],
-        overview: json["overview"],
+        overview: json["overview"] != "" ? json["overview"] : 'Nenhuma descrição encontrada!',
         voteAverange: json["vote_average"]?.toDouble() ?? 0.0,
       );
     } else {
