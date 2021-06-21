@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/app/pages/detail/movie_detail_view_model.dart';
+import 'package:movie_app/app/pages/movie/movie_model.dart';
+import 'package:movie_app/app/pages/movie/movie_view_model.dart';
 import 'package:movie_app/app/shared/storage/shared_preferences.dart';
 import '../../shared/models/movie.dart';
 
 class MovieDetailsView extends StatelessWidget {
-  final _viewModel = MovieDetailViewModel();
-  final _prefs = SharedPreferencesAdapter();
+  final _upcomingViewModel = ViewModel();
+  final _detailViewModel = MovieDetailViewModel();
+
+  final Movie id;
+
+  MovieDetailsView({Key key, this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -161,9 +167,9 @@ class MovieDetailsView extends StatelessWidget {
                                 ),
                                 // DATA
                                 StreamBuilder<Map<String, Movie>>(
-                                  stream: _viewModel.stream,
+                                  stream: _detailViewModel.favStream,
                                   initialData: {},
-                                  builder: (context, snapshot) {
+                                  builder: (context, AsyncSnapshot<Map<String, Movie>> snapshot) {
                                     if (snapshot.hasData) {
                                       return Container(
                                         decoration: BoxDecoration(
@@ -211,9 +217,9 @@ class MovieDetailsView extends StatelessWidget {
         ),
       ),
       floatingActionButton: StreamBuilder<Map<String, Movie>>(
-          stream: _viewModel.stream,
+          stream: _detailViewModel.favStream,
           initialData: {},
-          builder: (context, snapshot) {
+          builder: (context, AsyncSnapshot<Map<String, Movie>> snapshot) {
             if (snapshot.hasData) {
               return FloatingActionButton(
                 elevation: 0,
@@ -224,7 +230,7 @@ class MovieDetailsView extends StatelessWidget {
                   color: Colors.red[800],
                 ),
                 onPressed: () {
-                  _viewModel.toggleFavorite(movie);
+                  _detailViewModel.toggleFavorite(movie);
                 },
               );
             } else {

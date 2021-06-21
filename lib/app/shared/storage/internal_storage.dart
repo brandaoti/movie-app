@@ -3,7 +3,7 @@ import 'package:movie_app/app/shared/models/movie.dart';
 abstract class InternalStorageAdapter {
   void toggleFavorite(Movie movie);
 
-  void saveFavorite(String id);
+  Future<void> saveFavorite(int id, Map<String, dynamic> json);
 
-  void removeFavorite(String id);
+  Future<void> removeFavorite(int id);
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:movie_app/app/shared/models/movie.dart';
 import 'package:movie_app/app/shared/storage/internal_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,49 +12,26 @@ class SharedPreferencesAdapter extends InternalStorageAdapter {
 
   @override
   void toggleFavorite(Movie movie) {
-    if (favoriteMovies.contains(movie.id)) {
-      favoriteMovies.remove(movie.id);
-      isFavorite = false;
-    } else {
-      favoriteMovies.add(movie.id.toString());
-      isFavorite = true;
-    }
-
-    print(isFavorite);
-    print(favoriteMovies);
-    saveFavorite(movie.id.toString());
+    // if (favoriteMovies.contains(movie.id)) {
+    //   removeFavorite(movie.id);
+    // } else {
+    //   saveFavorite(movie.id);
+    // }
+    print('SS');
   }
 
   @override
-  void saveFavorite(String id) async {
+  Future<void> saveFavorite(int id, Map<String, dynamic> json) async {
     final internal = await _prefs;
-
-    favoriteMovies = internal.getStringList('favorites');
-
-    if (favoriteMovies == null) {
-      favoriteMovies = [];
-    }
-    favoriteMovies.add(id);
-
-    internal.setString('favorites', id.toString());
+    final response = jsonEncode(json);
+    await internal.setString('$id', response);
+    print('Salvo');
   }
 
   @override
-  void removeFavorite(String id) {}
-
-  // @override
-  // void onSaveFavoriteMovie(String id) async {
-  //   final internalPrefs = await _prefs;
-
-  //   favoriteMovies = internalPrefs.getStringList('favorites');
-
-  //   if (favoriteMovies == null) {
-  //     favoriteMovies = [];
-  //   }
-  //   favoriteMovies.add(id);
-
-  //   internalPrefs.setStringList('favorites', favoriteMovies);
-
-  //   print('ID $favoriteMovies');
-  // }
+  Future<void> removeFavorite(int id) async {
+    final internal = await _prefs;
+    await internal.remove('$id');
+    print('Removido');
+  }
 }
