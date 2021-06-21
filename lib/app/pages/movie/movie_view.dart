@@ -67,9 +67,7 @@ class _MovieViewState extends State<MovieView> {
                       }
 
                       return MovieCardComponent(
-                        posterPath: movie.posterPath != null
-                            ? 'https://image.tmdb.org/t/p/w300' + movie.posterPath
-                            : 'https://raw.githubusercontent.com/brandaoti/image-repository/main/image-unavailable.png',
+                        posterPath: movie.posterPath,
                         // instanciar nova foto
                         onTap: () {
                           Navigator.pushNamed(

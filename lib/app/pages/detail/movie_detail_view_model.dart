@@ -32,7 +32,6 @@ class MovieDetailViewModel {
       _favorites[movie.id.toString()] = movie;
     }
     _favoriteController.add(_favorites);
-    print(_favorites);
 
     _saveFavorite();
     print(_favorites);
@@ -44,6 +43,12 @@ class MovieDetailViewModel {
       prefs.setString("favorites", json.encode(_favorites));
     });
   }
+
+  // void _deleteFavorite(int id) async {
+  //   await SharedPreferences.getInstance().then((value) {
+  //     value.remove(id.toString());
+  //   });
+  // }
 
   dispose() {
     _favoriteController.close();

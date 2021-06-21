@@ -15,7 +15,10 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Movie app',
-      // home: HomePage(),
+      theme: ThemeData(
+        primaryColor: Color(0xFF020024),
+        accentColor: Color(0xFF3f3e57),
+      ),
       routes: {
         AppRoutes.HOME_PAGE: (context) => HomePage(),
         AppRoutes.MOVIE_DETAIL: (context) => MovieDetailsView(),

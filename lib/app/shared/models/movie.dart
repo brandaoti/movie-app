@@ -15,25 +15,30 @@ class Movie {
 
   Movie({
     this.id,
+    @required this.title,
+    @required this.posterPath,
+    @required this.releaseDate,
     this.backdropPath,
     this.overview,
     this.popularity,
     this.voteAverange,
     this.voteCount,
-    @required this.title,
-    @required this.posterPath,
-    @required this.releaseDate,
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
+    final String firstPath = 'https://image.tmdb.org/t/p/w300';
+
     if (json.containsKey("id")) {
       return Movie(
         id: json["id"],
         title: json["title"],
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] != null
+            ? firstPath + json["poster_path"]
+            : 'https://raw.githubusercontent.com/brandaoti/image-repository/main/image-unavailable.png',
         releaseDate: json["release_date"],
         backdropPath: json["backdrop_path"],
         overview: json["overview"],
+        voteAverange: json["vote_average"]?.toDouble() ?? 0.0,
       );
     } else {
       return Movie(
@@ -43,6 +48,7 @@ class Movie {
         releaseDate: json["movieRelease"],
         backdropPath: json["movieBackdrop"],
         overview: json["movieOverview"],
+        voteAverange: json["movieScore"],
       );
     }
   }
@@ -55,6 +61,7 @@ class Movie {
       "movieRelease": releaseDate,
       "movieBackdrop": backdropPath,
       "movieOverview": overview,
+      "movieScore": voteAverange,
     };
   }
 }

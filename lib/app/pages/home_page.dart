@@ -9,26 +9,39 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // elevation: 0,
-        backgroundColor: Colors.grey[800],
         title: Text('Cubos Academy'),
         centerTitle: true,
+        elevation: 20,
+        brightness: Brightness.dark,
+        // backgroundColor: Colors.transparent,
       ),
-      backgroundColor: Colors.grey[700],
+      extendBodyBehindAppBar: true,
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(child: BackPosterSlider()),
-            Expanded(
-              child: ListView(
-                children: [
-                  MovieView(),
-                  // MovieView(),
-                  // MovieView(),
-                ],
-              ),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF020024),
+                Color(0xFF48496a),
+                Color(0xFF7f7f8c),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [0.0, 0.5, 1.0],
             ),
-          ],
+          ),
+          child: Column(
+            children: [
+              Container(child: BackPosterSlider()),
+              Expanded(
+                child: ListView(
+                  children: [
+                    MovieView(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

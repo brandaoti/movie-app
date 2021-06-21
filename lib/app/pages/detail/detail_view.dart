@@ -15,125 +15,185 @@ class MovieDetailsView extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
+        brightness: Brightness.dark,
       ),
       extendBodyBehindAppBar: true,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // * Container para mostrar imagem
-          Container(
-              height: 500,
-              width: size.width,
-              decoration: BoxDecoration(
-                // color: Colors.red,
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    // TODO, fazer o tratamento no modelo do parse
-                    image: NetworkImage(
-                      movie.backdropPath != null
-                          ? 'https://image.tmdb.org/t/p/w300' + movie.posterPath
-                          : 'https://raw.githubusercontent.com/brandaoti/image-repository/main/image-unavailable.png',
-                      // Instanciar nova foto
-                    )),
-              ),
-              // * Container para add um gradient/efeito
-              child: Container(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF020024),
+              Color(0xFF3f3e57),
+              Color(0xFF7f7f8c),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.0, .5, 1.0],
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // * Container para mostrar imagem
+            Container(
+                height: 500,
+                width: size.width,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF303030),
-                      // Color(0xFF303030).withOpacity(.5),
-                      Color(0xFF303030).withOpacity(.1),
-                      Colors.transparent,
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
+                  // color: Colors.red,
+                  image: DecorationImage(
+                    image: NetworkImage(movie.backdropPath),
+                    fit: BoxFit.fill,
                   ),
                 ),
-              )),
+                // * Container para add um gradient/efeito
+                child: Container(
+                  decoration: BoxDecoration(
+                      // gradient: LinearGradient(
+                      //     // colors: [
+                      //     //   Color(0xFF303030),
+                      //     //   // Color(0xFF303030).withOpacity(.5),
+                      //     //   Color(0xFF303030).withOpacity(.1),
+                      //     //   Colors.transparent,
+                      //     // ],
+                      //     // begin: Alignment.bottomCenter,
+                      //     // end: Alignment.topCenter,
+                      //     ),
+                      ),
+                )),
 
-          // nome, data, descrição
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  children: [
-                    Container(
-                        width: size.width,
-                        color: Colors.red,
-                        child: Text(movie.title,
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                            ))),
-
-                    //!
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+            // nome, data, descrição
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                          width: size.width,
+                          // color: Colors.red,
+                          child: Text(movie.title,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                              ))),
+                      Column(
                         children: [
-                          Container(
-                              padding: EdgeInsets.all(4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color: Colors.red.withOpacity(.5),
-                              ),
-                              child: Column(
-                                children: [
-                                  Text('Lançamento'),
-                                  Text(movie.releaseDate),
-                                ],
-                              )),
-
-                          // Divider(color: Colors.red),
-                          Container(
-                            width: MediaQuery.of(context).size.width * .6,
-                            margin: EdgeInsets.only(left: 30.0),
-                            child: Wrap(
-                              spacing: 10.0,
+                          //!
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text('Vote'),
-                                StreamBuilder<Map<String, Movie>>(
-                                  stream: _viewModel.stream,
-                                  initialData: {},
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      return Text('${snapshot.data.length}');
-                                    } else {
-                                      return CircularProgressIndicator();
-                                    }
-                                  },
+                                Container(
+                                    padding: EdgeInsets.all(4.0),
+                                    margin: EdgeInsets.only(right: 12.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.0),
+                                      color: Colors.black.withOpacity(.5),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          'Release',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            letterSpacing: .5,
+                                            wordSpacing: .5,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        Text(
+                                          movie.releaseDate,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            letterSpacing: 1,
+                                            wordSpacing: .5,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+
+                                //
+                                Container(
+                                  color: Colors.black38,
+                                  padding: EdgeInsets.all(4.0),
+                                  child: Wrap(
+                                    spacing: 10.0,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text(
+                                            'Score',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              letterSpacing: .5,
+                                              wordSpacing: .5,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                          Text(
+                                            movie.voteAverange.toString(),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              letterSpacing: 1,
+                                              wordSpacing: .5,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+                                      // DATA
+                                      // StreamBuilder<Map<String, Movie>>(
+                                      //   stream: _viewModel.stream,
+                                      //   initialData: {},
+                                      //   builder: (context, snapshot) {
+                                      //     if (snapshot.hasData) {
+                                      //       return Text('${snapshot.data.length}');
+                                      //     } else {
+                                      //       return CircularProgressIndicator();
+                                      //     }
+                                      //   },
+                                      // ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                           ),
+                          Container(
+                              color: Colors.black38,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  // TODO, fazer formatação do texto
+                                  Text(
+                                    movie.overview == '' ? 'Não tem descrição' : movie.overview,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      letterSpacing: 1.5,
+                                      wordSpacing: 0.5,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              )),
                         ],
                       ),
-                    ),
-                    Container(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Descrição',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
-                        SizedBox(height: 8.0),
-                        // TODO, fazer formatação do texto
-                        Text(movie.overview),
-                      ],
-                    )),
-                    //
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: StreamBuilder<Map<String, Movie>>(
           stream: _viewModel.stream,
