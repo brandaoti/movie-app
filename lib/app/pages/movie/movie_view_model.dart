@@ -23,16 +23,16 @@ class ViewModel {
     });
   }
 
-  saveFavorite(int id, Movie movie) {
-    _model.saveMovie(id, movie);
-  }
-
-  removeFavorite(int id) {
-    _model.removeMovie(id);
-  }
-
   nextPage() {
     _page++;
     loadMovie();
   }
 }
+
+// saveFavorite(int id, Movie movie) {
+//   _model.saveMovie(id, movie);
+// }
+
+// removeFavorite(int id) {
+//   _model.removeMovie(id);
+// }

@@ -19,11 +19,11 @@ class MovieModel {
     return movies = repositoryApi.fetchMovie(page);
   }
 
-  saveMovie(int id, Movie movie) {
-    internalStorage.saveFavorite(id, movie.toJson());
-  }
+  // saveMovie(int id, Movie movie) {
+  //   internalStorage.saveFavorite(id, movie.toJson());
+  // }
 
-  removeMovie(int id) async {
-    await internalStorage.removeFavorite(id);
-  }
+  // removeMovie(int id) async {
+  //   await internalStorage.removeFavorite(id);
+  // }
 }

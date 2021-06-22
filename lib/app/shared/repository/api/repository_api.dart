@@ -35,10 +35,9 @@ class RepositoryApi {
   Future<MovieDetail> fetchMovieDetail(int id) async {
     var params = {
       'api_key': _apiKey,
-      'id': '$id',
     };
 
-    final response = await http.get(Uri.http(_authority, _path, params));
+    final response = await http.get(Uri.http(_authority, '/3/movie/$id', params));
 
     if (response.statusCode == 200) {
       return MovieDetail.fromJson(jsonDecode(response.body));

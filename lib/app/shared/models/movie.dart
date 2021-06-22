@@ -69,6 +69,8 @@ class Movie {
 }
 
 class MovieDetail {
+  List<MovieDetail> list;
+
   final int id;
   final String title;
   final String posterPath;

@@ -1,20 +1,60 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:movie_app/app/pages/detail/movie_detail_model.dart';
 import 'package:movie_app/app/shared/models/movie.dart';
+import 'package:movie_app/app/shared/storage/internal_storage.dart';
+import 'package:movie_app/app/shared/storage/secure_storage.dart';
+import 'package:movie_app/app/shared/storage/shared_preferences.dart';
 
 class MovieDetailViewModel {
   final _detailModel = MovieDetailModel();
 
-  StreamController<MovieDetail> _streamController = StreamController();
+  StreamController<MovieDetail> _streamController = StreamController.broadcast();
+  InternalStorageAdapter internalStorage;
+
+  MovieDetailViewModel({
+    InternalStorageAdapter adapter,
+  }) : internalStorage = adapter ?? SecureStorage();
 
   get stream => _streamController.stream;
 
+  String newFavoriteInstance;
+  IconData favorite;
+
+  toggleFavorite(int id) {
+    favorite = newFavoriteInstance != null ? Icons.favorite : Icons.favorite_border;
+
+    if (favorite == Icons.favorite_border) {
+      saveFavorite(id);
+    } else {
+      removeFavorite(id);
+    }
+  }
+
   loadMovieDetail(int id) {
-    _detailModel.getLoadMovieDetail(id).then((value) {
-      //
+    _detailModel.getLoadMovieDetail(id);
+    _detailModel.movieDetail.then((value) async {
+      newFavoriteInstance = await getFavoriteMovie(value.id);
+      value.isFavorite = newFavoriteInstance != null;
       _streamController.add(value);
     });
+  }
+
+  Future<String> getFavoriteMovie(int id) async {
+    return await internalStorage.getFavoriteMovie(id);
+  }
+
+  saveFavorite(int id) {
+    internalStorage.saveFavorite(id);
+  }
+
+  void removeFavorite(int id) {
+    internalStorage.removeFavorite(id);
+  }
+
+  void dispose() {
+    _streamController.close();
   }
 }
 
@@ -62,8 +102,4 @@ class MovieDetailViewModel {
 //   await SharedPreferences.getInstance().then((value) {
 //     value.remove(id.toString());
 //   });
-// }
-
-// void dispose() {
-//   _favoriteController.close();
 // }
