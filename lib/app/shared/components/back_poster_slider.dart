@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/pages/movie/movie_view_model.dart';
-import 'package:movie_app/app/shared/components/cards/back_slider_card_component.dart';
-import 'package:movie_app/app/shared/components/loadings/loading_progress_component.dart';
-import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:movie_app/app/shared/models/movie_response.dart';
 import 'package:page_indicator/page_indicator.dart';
+
+import '../../pages/movie/movie_view_model.dart';
+import '../models/movie.dart';
+import 'cards/back_slider_card_component.dart';
+import 'loadings/loading_progress_component.dart';
 
 class BackPosterSlider extends StatefulWidget {
   BackPosterSlider({Key key}) : super(key: key);

@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import '../../shared/models/movie.dart';
 import 'movie_model.dart';
 
 class ViewModel {

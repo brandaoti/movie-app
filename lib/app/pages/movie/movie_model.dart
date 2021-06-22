@@ -1,8 +1,7 @@
-import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:movie_app/app/shared/models/movie_response.dart';
-import 'package:movie_app/app/shared/storage/internal_storage.dart';
-import 'package:movie_app/app/shared/storage/shared_preferences.dart';
+import '../../shared/models/movie_response.dart';
 import '../../shared/repository/api/repository_api.dart';
+import '../../shared/storage/internal_storage.dart';
+import '../../shared/storage/shared_preferences.dart';
 
 class MovieModel {
   final RepositoryApi repositoryApi;

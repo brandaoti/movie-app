@@ -1,24 +1,26 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/pages/detail/movie_detail_model.dart';
-import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:movie_app/app/shared/storage/internal_storage.dart';
-import 'package:movie_app/app/shared/storage/secure_storage.dart';
-import 'package:movie_app/app/shared/storage/shared_preferences.dart';
+
+import '../../shared/models/movie.dart';
+import '../../shared/storage/internal_storage.dart';
+import '../../shared/storage/secure_storage.dart';
+import 'movie_detail_model.dart';
 
 class MovieDetailViewModel {
   final _detailModel = MovieDetailModel();
 
   StreamController<MovieDetail> _streamController = StreamController.broadcast();
-  InternalStorageAdapter internalStorage;
+  InternalStorageAdapter _internalStorage;
 
+  // Using adapters to make changing storage easier
   MovieDetailViewModel({
     InternalStorageAdapter adapter,
-  }) : internalStorage = adapter ?? SecureStorage();
+  }) : _internalStorage = adapter ?? SecureStorage();
 
   get stream => _streamController.stream;
 
+  // Variables to compare test
   String newFavoriteInstance;
   IconData favorite;
 
@@ -33,8 +35,7 @@ class MovieDetailViewModel {
   }
 
   loadMovieDetail(int id) {
-    _detailModel.getLoadMovieDetail(id);
-    _detailModel.movieDetail.then((value) async {
+    _detailModel.getLoadMovieDetail(id).then((value) async {
       newFavoriteInstance = await getFavoriteMovie(value.id);
       value.isFavorite = newFavoriteInstance != null;
       _streamController.add(value);
@@ -42,64 +43,18 @@ class MovieDetailViewModel {
   }
 
   Future<String> getFavoriteMovie(int id) async {
-    return await internalStorage.getFavoriteMovie(id);
+    return await _internalStorage.getFavoriteMovie(id);
   }
 
   saveFavorite(int id) {
-    internalStorage.saveFavorite(id);
+    _internalStorage.saveFavorite(id);
   }
 
   void removeFavorite(int id) {
-    internalStorage.removeFavorite(id);
+    _internalStorage.removeFavorite(id);
   }
 
   void dispose() {
     _streamController.close();
   }
 }
-
-// Map<String, Movie> _favorites = {};
-
-// final StreamController<Map<String, Movie>> _favoriteController = StreamController.broadcast();
-
-// Stream<Map<String, Movie>> get favStream => _favoriteController.stream;
-
-// final _prefs = SharedPreferences.getInstance();
-
-// MovieDetailViewModel() {
-//   SharedPreferences.getInstance().then((prefs) {
-//     // prefs.clear();
-//     if (prefs.getKeys().contains("favorites")) {
-//       _favorites = json.decode(prefs.getString("favorites")).map((key, value) {
-//         return MapEntry(key, Movie.fromJson(value));
-//       }).cast<String, Movie>();
-//     }
-//   });
-
-//   _favoriteController.add(_favorites);
-// }
-
-// void toggleFavorite(Movie movie) {
-//   if (_favorites.containsKey(movie.id)) {
-//     _favorites.remove(movie.id);
-//   } else {
-//     _favorites[movie.id.toString()] = movie;
-//   }
-//   _favoriteController.sink.add(_favorites);
-
-//   // _saveFavorite();
-//   print(_favorites);
-// }
-
-// void _saveFavorite() async {
-//   // final internal = await _prefs;
-//   SharedPreferences.getInstance().then((prefs) {
-//     prefs.setString("favorites", json.encode(_favorites));
-//   });
-// }
-
-// void _deleteFavorite(int id) async {
-//   await SharedPreferences.getInstance().then((value) {
-//     value.remove(id.toString());
-//   });
-// }

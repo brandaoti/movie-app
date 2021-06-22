@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:movie_app/app/pages/detail/detail_view.dart';
-import 'package:movie_app/app/shared/routes/app_routes.dart';
 
+import 'pages/detail/detail_view.dart';
 import 'pages/home_page.dart';
+import 'shared/routes/app_routes.dart';
 
 class AppWidget extends StatelessWidget {
   @override

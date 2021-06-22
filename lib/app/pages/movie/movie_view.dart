@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/shared/components/loadings/loading_progress_component.dart';
-import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:movie_app/app/shared/models/movie_response.dart';
-import 'package:movie_app/app/shared/routes/app_routes.dart';
+import '../../shared/components/loadings/loading_progress_component.dart';
+import '../../shared/models/movie.dart';
+import '../../shared/models/movie_response.dart';
+import '../../shared/routes/app_routes.dart';
 
 import '../../shared/components/cards/movie_card_component.dart';
 import '../detail/detail_view.dart';

@@ -1,4 +1,4 @@
-import 'package:movie_app/app/shared/models/movie.dart';
+import 'movie.dart';
 
 class MovieResponse {
   List<Movie> movies;

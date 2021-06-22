@@ -1,12 +1,14 @@
-import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:movie_app/app/shared/repository/api/repository_api.dart';
+import '../../shared/models/movie.dart';
+import '../../shared/repository/api/repository_api.dart';
 
 class MovieDetailModel {
   final _repositoryApi = RepositoryApi();
 
-  Future<MovieDetail> movieDetail;
+  Future<MovieDetail> _movieDetail;
+
+  Future<MovieDetail> get movieDetail => _movieDetail;
 
   getLoadMovieDetail(int id) {
-    return movieDetail = _repositoryApi.fetchMovieDetail(id);
+    return _movieDetail = _repositoryApi.fetchMovieDetail(id);
   }
 }

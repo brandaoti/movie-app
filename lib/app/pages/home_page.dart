@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/pages/movie/movie_view.dart';
-import 'package:movie_app/app/shared/components/back_poster_slider.dart';
+import 'movie/movie_view.dart';
+import '../shared/components/back_poster_slider.dart';
 
 class HomePage extends StatelessWidget {
-  // const HomePage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
