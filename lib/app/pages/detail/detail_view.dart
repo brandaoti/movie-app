@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/app/pages/detail/movie_detail_view_model.dart';
+import 'package:movie_app/app/pages/movie/movie_model.dart';
+import 'package:movie_app/app/pages/movie/movie_view_model.dart';
+import 'package:movie_app/app/shared/storage/shared_preferences.dart';
 import '../../shared/models/movie.dart';
 
-class MovieDetailsView extends StatelessWidget {
-  final _viewModel = MovieDetailViewModel();
+class MovieDetailsView extends StatefulWidget {
+  @override
+  _MovieDetailsViewState createState() => _MovieDetailsViewState();
+}
+
+class _MovieDetailsViewState extends State<MovieDetailsView> {
+  final _detailViewModel = MovieDetailViewModel();
+
+  IconData favorites;
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    final movie = ModalRoute.of(context).settings.arguments as Movie;
+    final movieID = ModalRoute.of(context).settings.arguments as int;
+
+    _detailViewModel.loadMovieDetail(movieID);
 
     return Scaffold(
       appBar: AppBar(
@@ -31,198 +43,201 @@ class MovieDetailsView extends StatelessWidget {
             stops: [0.0, .5, 1.0],
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // * Container para mostrar imagem
-            Container(
-                height: 500,
-                width: size.width,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(movie.posterPath),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                // * Container para add um gradient/efeito
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xFF020024).withOpacity(0.0),
-                        Color(0xFF3f3e57).withOpacity(.1),
-                        Color(0xFF4E4C61).withOpacity(1),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      stops: [0.0, 0.9, 1.0],
-                    ),
-                  ),
-                )),
+        child: StreamBuilder<MovieDetail>(
+          stream: _detailViewModel.stream,
+          builder: (context, snapshot) {
+            var details = snapshot.data;
 
-            // nome, data, descrição
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+
+              case ConnectionState.waiting:
+                return Center(child: Text('Carregando'));
+
+              default:
+                if (snapshot.hasData) {
+                  // favorites =
+                  //     _detailViewModel.favorites != null ? Icons.favorite : Icons.favorite_border;
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // * Container para mostrar imagem
                       Container(
+                          height: 500,
                           width: size.width,
-                          child: Text(
-                            movie.title,
-                            style: TextStyle(
-                              fontSize: 24.0,
-                              color: Colors.white,
-                              letterSpacing: 1.5,
-                              fontWeight: FontWeight.w700,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(details.posterPath),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          // * Container para add um gradient/efeito
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color(0xFF020024).withOpacity(0.0),
+                                  Color(0xFF3f3e57).withOpacity(.1),
+                                  Color(0xFF4E4C61).withOpacity(1),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                stops: [0.0, 0.9, 1.0],
+                              ),
                             ),
                           )),
-                      Column(
-                        children: [
-                          //!
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+
+                      // nome, data, descrição
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 Container(
-                                    padding: EdgeInsets.all(4.0),
-                                    margin: EdgeInsets.only(right: 12.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: Colors.red.withOpacity(.7),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          'Release',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            letterSpacing: .5,
-                                            wordSpacing: .5,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        Text(
-                                          movie.releaseDate,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            letterSpacing: 1,
-                                            wordSpacing: .5,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
+                                    width: size.width,
+                                    child: Text(
+                                      details.title,
+                                      style: TextStyle(
+                                        fontSize: 24.0,
+                                        color: Colors.white,
+                                        letterSpacing: 1.5,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     )),
-
-                                //
-                                Container(
-                                  padding: EdgeInsets.all(4.0),
-                                  margin: EdgeInsets.only(right: 12.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    color: Colors.red.withOpacity(.7),
-                                  ),
-                                  child: Wrap(
-                                    spacing: 10.0,
-                                    children: [
-                                      Column(
+                                Column(
+                                  children: [
+                                    //!
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'Score',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 14,
-                                              letterSpacing: .5,
-                                              wordSpacing: .5,
-                                              fontWeight: FontWeight.w400,
+                                          Container(
+                                              padding: EdgeInsets.all(4.0),
+                                              margin: EdgeInsets.only(right: 12.0),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(8.0),
+                                                color: Colors.black.withOpacity(.7),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                    'Release',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                      letterSpacing: .5,
+                                                      wordSpacing: .5,
+                                                      fontWeight: FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    details.releaseDate,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12,
+                                                      letterSpacing: 1,
+                                                      wordSpacing: .5,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              )),
+
+                                          //
+                                          Container(
+                                            padding: EdgeInsets.all(4.0),
+                                            margin: EdgeInsets.only(right: 12.0),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8.0),
+                                              color: Colors.black.withOpacity(.7),
                                             ),
-                                          ),
-                                          Text(
-                                            movie.voteAverange.toString(),
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              letterSpacing: 1,
-                                              wordSpacing: .5,
-                                              fontWeight: FontWeight.bold,
+                                            child: Wrap(
+                                              spacing: 10.0,
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Text(
+                                                      'Score',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14,
+                                                        letterSpacing: .5,
+                                                        wordSpacing: .5,
+                                                        fontWeight: FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      details.voteAverange.toString(),
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        letterSpacing: 1,
+                                                        wordSpacing: .5,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                // DATA
-                                StreamBuilder<Map<String, Movie>>(
-                                  stream: _viewModel.stream,
-                                  initialData: {},
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      return Container(
+                                    ),
+                                    Container(
+                                        padding: EdgeInsets.all(8.0),
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(4.0),
-                                          // color: Colors.red,
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          color: Colors.black.withOpacity(.05),
                                         ),
-                                        child: TextButton.icon(
-                                          icon: Icon(Icons.favorite, color: Colors.red),
-                                          label: Text('${snapshot.data.length}'),
-                                          onPressed: () {},
-                                        ),
-                                      );
-                                    } else {
-                                      return CircularProgressIndicator();
-                                    }
-                                  },
+                                        child: Text(
+                                          details.overview,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            letterSpacing: 1.5,
+                                            wordSpacing: 0.5,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        )),
+                                  ],
                                 ),
                               ],
                             ),
                           ),
-                          Container(
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color: Colors.black.withOpacity(.05),
-                              ),
-                              child: Text(
-                                movie.overview,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  letterSpacing: 1.5,
-                                  wordSpacing: 0.5,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              )),
-                        ],
+                        ),
                       ),
                     ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+                  );
+                } else {
+                  return Center(child: Text('Erro ao carregar dados'));
+                }
+            }
+          },
         ),
       ),
-      floatingActionButton: StreamBuilder<Map<String, Movie>>(
-          stream: _viewModel.stream,
-          initialData: {},
+
+      //! FAB
+      floatingActionButton: StreamBuilder<MovieDetail>(
+          stream: _detailViewModel.stream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return FloatingActionButton(
                 elevation: 0,
                 backgroundColor: Colors.white.withOpacity(.3),
                 child: Icon(
-                  snapshot.data.containsKey(movie.id) ? Icons.favorite : Icons.favorite_border,
+                  snapshot.data.isFavorite != false ? Icons.favorite : Icons.favorite_border,
                   size: 36.0,
                   color: Colors.red[800],
                 ),
                 onPressed: () {
-                  _viewModel.toggleFavorite(movie);
+                  setState(() {
+                    _detailViewModel.toggleFavorite(movieID);
+                  });
                 },
               );
             } else {
@@ -232,3 +247,4 @@ class MovieDetailsView extends StatelessWidget {
     );
   }
 }
+// DATA

@@ -1,13 +1,15 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:movie_app/app/shared/models/movie_response.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'movie_model.dart';
 
 class ViewModel {
   final _model = MovieModel();
 
-  StreamController<List<Movie>> _streamController = StreamController();
+  StreamController<List<Movie>> _streamController = StreamController.broadcast();
   List<Movie> movieList = [];
 
   int _page = 1;
@@ -21,16 +23,16 @@ class ViewModel {
     });
   }
 
-  saveFavoriteMovie(String id) {
-    _model.saveMovie(id);
-  }
-
-  removeFavoriteMovie(String id) {
-    _model.removeMovie(id);
-  }
-
   nextPage() {
     _page++;
     loadMovie();
   }
 }
+
+// saveFavorite(int id, Movie movie) {
+//   _model.saveMovie(id, movie);
+// }
+
+// removeFavorite(int id) {
+//   _model.removeMovie(id);
+// }

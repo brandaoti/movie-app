@@ -1,3 +1,4 @@
+import 'package:movie_app/app/shared/models/movie.dart';
 import 'package:movie_app/app/shared/models/movie_response.dart';
 import 'package:movie_app/app/shared/storage/internal_storage.dart';
 import 'package:movie_app/app/shared/storage/shared_preferences.dart';
@@ -18,11 +19,11 @@ class MovieModel {
     return movies = repositoryApi.fetchMovie(page);
   }
 
-  saveMovie(String id) {
-    internalStorage.onSaveFavoriteMovie(id);
-  }
+  // saveMovie(int id, Movie movie) {
+  //   internalStorage.saveFavorite(id, movie.toJson());
+  // }
 
-  removeMovie(String id) {
-    internalStorage.onRemoveFavoriteMovie(id);
-  }
+  // removeMovie(int id) async {
+  //   await internalStorage.removeFavorite(id);
+  // }
 }

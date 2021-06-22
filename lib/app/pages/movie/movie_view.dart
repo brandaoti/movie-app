@@ -87,7 +87,7 @@ class _MovieViewState extends State<MovieView> {
                               Navigator.pushNamed(
                                 context,
                                 AppRoutes.MOVIE_DETAIL,
-                                arguments: movie,
+                                arguments: movie.id,
                               );
                             },
                           );

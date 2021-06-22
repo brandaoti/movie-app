@@ -31,4 +31,18 @@ class RepositoryApi {
       return throw 'Erro no retorno da api';
     }
   }
+
+  Future<MovieDetail> fetchMovieDetail(int id) async {
+    var params = {
+      'api_key': _apiKey,
+    };
+
+    final response = await http.get(Uri.http(_authority, '/3/movie/$id', params));
+
+    if (response.statusCode == 200) {
+      return MovieDetail.fromJson(jsonDecode(response.body));
+    } else {
+      return throw 'Erro no retorno da api';
+    }
+  }
 }
