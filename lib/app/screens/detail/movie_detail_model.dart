@@ -1,5 +1,5 @@
-import '../../shared/models/movie.dart';
-import '../../shared/repository/api/repository_api.dart';
+import '../../../data/models/movie.dart';
+import '../../../data/repositories/repository_api.dart';
 
 class MovieDetailModel {
   final _repositoryApi = RepositoryApi();

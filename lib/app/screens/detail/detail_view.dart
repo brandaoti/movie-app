@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../data/models/movie.dart';
 
-import '../../shared/models/movie.dart';
 import 'movie_detail_view_model.dart';
 
 class MovieDetailsView extends StatefulWidget {

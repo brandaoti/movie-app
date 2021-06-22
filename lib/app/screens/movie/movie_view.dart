@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import '../../../data/models/movie.dart';
 import '../../shared/components/loadings/loading_progress_component.dart';
-import '../../shared/models/movie.dart';
-import '../../shared/models/movie_response.dart';
+
 import '../../shared/routes/app_routes.dart';
 
 import '../../shared/components/cards/movie_card_component.dart';
-import '../detail/detail_view.dart';
+
 import 'movie_view_model.dart';
 
 class MovieView extends StatefulWidget {

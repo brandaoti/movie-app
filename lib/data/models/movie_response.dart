@@ -13,9 +13,5 @@ class MovieResponse {
     movies = tempList.map((item) {
       return Movie.fromJson(item);
     }).toList();
-
-    // movies = (json['results'] as List).map((item) {
-    //   return Movie.fromJson(item);
-    // }).toList();
   }
 }

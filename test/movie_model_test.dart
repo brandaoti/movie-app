@@ -1,8 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_app/app/pages/movie/movie_model.dart';
-import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:movie_app/app/shared/models/movie_response.dart';
-import 'package:movie_app/app/shared/repository/api/repository_api.dart';
+import 'package:movie_app/app/screens/movie/movie_model.dart';
+
+import 'package:movie_app/data/models/movie.dart';
+import 'package:movie_app/data/models/movie_response.dart';
+import 'package:movie_app/data/repositories/repository_api.dart';
 
 void main() {
   test('FecthMovie, testa o valor da variavel movie', () {

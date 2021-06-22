@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import '../../shared/models/movie.dart';
+import '../../../data/models/movie.dart';
+
 import 'movie_model.dart';
 
 class ViewModel {
@@ -25,11 +26,3 @@ class ViewModel {
     loadMovie();
   }
 }
-
-// saveFavorite(int id, Movie movie) {
-//   _model.saveMovie(id, movie);
-// }
-
-// removeFavorite(int id) {
-//   _model.removeMovie(id);
-// }

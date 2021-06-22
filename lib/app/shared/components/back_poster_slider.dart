@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../screens/movie/movie_view_model.dart';
+import '../../../data/models/movie.dart';
 import 'package:page_indicator/page_indicator.dart';
 
-import '../../pages/movie/movie_view_model.dart';
-import '../models/movie.dart';
 import 'cards/back_slider_card_component.dart';
 import 'loadings/loading_progress_component.dart';
 

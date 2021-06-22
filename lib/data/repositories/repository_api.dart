@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../../models/movie.dart';
-import '../../models/movie_response.dart';
+import '../models/movie.dart';
+import '../models/movie_response.dart';
 
 class RepositoryApi {
   const RepositoryApi();

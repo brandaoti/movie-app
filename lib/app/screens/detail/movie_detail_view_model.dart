@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
-import '../../shared/models/movie.dart';
-import '../../shared/storage/internal_storage.dart';
-import '../../shared/storage/secure_storage.dart';
+import '../../../data/models/movie.dart';
+import '../../../data/storage/internal_storage.dart';
+import '../../../data/storage/secure_storage.dart';
 import 'movie_detail_model.dart';
 
 class MovieDetailViewModel {

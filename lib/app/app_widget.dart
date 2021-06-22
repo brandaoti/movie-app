@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'pages/detail/detail_view.dart';
-import 'pages/home_page.dart';
+import 'screens/detail/detail_view.dart';
+import 'screens/home_page.dart';
 import 'shared/routes/app_routes.dart';
 
 class AppWidget extends StatelessWidget {
