@@ -24,77 +24,72 @@ class _MovieUpcomingState extends State<MovieUpcoming> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var _size = MediaQuery.of(context).size;
 
     return Container(
       // height: 500,
       child: StreamBuilder<List<Movie>>(
         stream: _upcomingViewModel.stream,
         builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
+          if (snapshot.connectionState != ConnectionState.active) {
+            return LoadingCircularIndicator();
+          }
+          // * chamada de erro
+          if (snapshot.hasError) {
+            return LoadingErrorComponent(onPressed: () {
+              setState(() {
+                _upcomingViewModel.loadMovie();
+              });
+            });
 
-            // * chamada de espera
-            case ConnectionState.waiting:
-              return LoadingCircularIndicator();
-
-            default:
-              // * chamada de erro
-              if (snapshot.hasError) {
-                return LoadingErrorComponent(onPressed: () {
-                  setState(() {
-                    _upcomingViewModel.loadMovie();
-                  });
-                });
-
-                // * chamada da construção do layout com retorno da api
-              } else {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, top: 16.0),
-                      child: Text(
-                        'Upcoming',
-                        style: TextStyle(
-                          color: Colors.white,
-                          letterSpacing: 1.5,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+            // * chamada da construção do layout com retorno da api
+          } else {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 16.0, bottom: 4.0),
+                  child: Text(
+                    'Upcoming',
+                    style: TextStyle(
+                      color: Colors.white,
+                      letterSpacing: 1.5,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Container(
-                      height: 280,
-                      width: size.width,
-                      // margin: EdgeInsets.symmetric(vertical: 8.0),
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) {
-                          var movie = snapshot.data[index];
+                  ),
+                ),
+                Container(
+                  height: _size.height * .35,
+                  width: _size.width,
+                  // margin: EdgeInsets.symmetric(vertical: 8.0),
 
-                          if (index == snapshot.data.length - 1) {
-                            _upcomingViewModel.nextPage();
-                          }
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      var movie = snapshot.data[index];
 
-                          return MovieCardComponent(
-                            posterPath: movie.posterPath,
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                AppRoutes.MOVIE_DETAIL,
-                                arguments: movie.id,
-                              );
-                            },
+                      if (index == snapshot.data.length - 3) {
+                        _upcomingViewModel.nextPage();
+                      }
+
+                      return MovieCardComponent(
+                        posterPath: movie.posterPath,
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.MOVIE_DETAIL,
+                            arguments: movie.id,
                           );
                         },
-                      ),
-                    ),
-                  ],
-                );
-              }
+                      );
+                    },
+                  ),
+                ),
+              ],
+            );
           }
         },
       ),

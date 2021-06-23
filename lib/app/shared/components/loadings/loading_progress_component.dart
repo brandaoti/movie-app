@@ -6,21 +6,15 @@ class LoadingCircularIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final _size = MediaQuery.of(context).size;
 
     return Container(
-      height: size.width,
-      width: size.width,
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          CircularProgressIndicator(
-            strokeWidth: 5.0,
-            // backgroundColor: Colors.redAccent,
-          ),
-          Text('Carregando...', textScaleFactor: 2.0),
-        ],
+      height: _size.height * .45,
+      width: _size.width,
+      child: Center(
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.white,
+        ),
       ),
     );
   }

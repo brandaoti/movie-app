@@ -8,9 +8,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cubos Academy'),
-        centerTitle: true,
         elevation: 0,
+        title: Text('Cubos Academy'),
+        leading: Container(
+          margin: EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/logo.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+        centerTitle: true,
         brightness: Brightness.dark,
         // backgroundColor: Colors.transparent,
       ),
@@ -21,8 +28,8 @@ class HomeScreen extends StatelessWidget {
             gradient: LinearGradient(
               colors: [
                 Color(0xFF020024),
-                Color(0xFF48496a),
-                Color(0xFF7f7f8c),
+                Color(0xFF1C1A44),
+                Color(0xFF4E4C61),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
