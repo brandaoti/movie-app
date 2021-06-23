@@ -71,7 +71,7 @@ class _MovieUpcomingState extends State<MovieUpcoming> {
                     itemBuilder: (context, index) {
                       var movie = snapshot.data[index];
 
-                      if (index == snapshot.data.length - 1) {
+                      if (index == snapshot.data.length - 3) {
                         _upcomingViewModel.nextPage();
                       }
 

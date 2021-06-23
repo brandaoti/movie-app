@@ -21,8 +21,8 @@ class HomeScreen extends StatelessWidget {
             gradient: LinearGradient(
               colors: [
                 Color(0xFF020024),
-                Color(0xFF48496a),
-                Color(0xFF7f7f8c),
+                Color(0xFF1C1A44),
+                Color(0xFF4E4C61),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
