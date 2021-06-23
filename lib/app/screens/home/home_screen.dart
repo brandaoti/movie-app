@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../movie_upcoming/movie_upcoming.dart';
-import '../../shared/components/back_poster_slider.dart';
+import '../../shared/components/movie_carousel_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Container(child: BackPosterSlider()),
+              Container(child: MovieCarouselSlider()),
               Expanded(
                 child: ListView(
                   children: [
