@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'app/screens/home/home_screen.dart';
-import 'app/screens/movie_details/detail_view.dart';
+import 'app/screens/movie_details/movie_detail.dart';
 import 'app/shared/routes/app_routes.dart';
 
 class AppWidget extends StatelessWidget {
@@ -21,7 +21,7 @@ class AppWidget extends StatelessWidget {
       ),
       routes: {
         AppRoutes.HOME_PAGE: (context) => HomeScreen(),
-        AppRoutes.MOVIE_DETAIL: (context) => MovieDetailsView(),
+        AppRoutes.MOVIE_DETAIL: (context) => MovieDetailScreen(),
       },
     );
   }

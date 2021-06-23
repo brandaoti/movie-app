@@ -3,12 +3,12 @@ import '../../../data/models/movie.dart';
 
 import 'movie_detail_view_model.dart';
 
-class MovieDetailsView extends StatefulWidget {
+class MovieDetailScreen extends StatefulWidget {
   @override
-  _MovieDetailsViewState createState() => _MovieDetailsViewState();
+  _MovieDetailScreenState createState() => _MovieDetailScreenState();
 }
 
-class _MovieDetailsViewState extends State<MovieDetailsView> {
+class _MovieDetailScreenState extends State<MovieDetailScreen> {
   final _detailViewModel = MovieDetailViewModel();
 
   IconData favorites;
