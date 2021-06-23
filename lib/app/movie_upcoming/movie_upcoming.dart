@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
+
 import '../../../data/models/movie.dart';
-import '../../shared/components/loadings/loading_progress_component.dart';
+import '../shared/components/cards/movie_card_component.dart';
+import '../shared/components/loadings/loading_progress_component.dart';
+import '../shared/routes/app_routes.dart';
+import 'movie_upcoming_view_model.dart';
 
-import '../../shared/routes/app_routes.dart';
-
-import '../../shared/components/cards/movie_card_component.dart';
-
-import 'movie_view_model.dart';
-
-class MovieView extends StatefulWidget {
-  MovieView({Key key}) : super(key: key);
+class MovieUpcoming extends StatefulWidget {
+  MovieUpcoming({Key key}) : super(key: key);
 
   @override
-  _MovieViewState createState() => _MovieViewState();
+  _MovieUpcomingState createState() => _MovieUpcomingState();
 }
 
-class _MovieViewState extends State<MovieView> {
-  final _controller = ViewModel();
+class _MovieUpcomingState extends State<MovieUpcoming> {
+  final _upcomingViewModel = UpcomingViewModel();
 
   @override
   void initState() {
     super.initState();
-    _controller.loadMovie();
+    _upcomingViewModel.loadMovie();
   }
 
   @override
@@ -31,7 +29,7 @@ class _MovieViewState extends State<MovieView> {
     return Container(
       // height: 500,
       child: StreamBuilder<List<Movie>>(
-        stream: _controller.stream,
+        stream: _upcomingViewModel.stream,
         builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
@@ -45,7 +43,7 @@ class _MovieViewState extends State<MovieView> {
               if (snapshot.hasError) {
                 return LoadingErrorComponent(onPressed: () {
                   setState(() {
-                    _controller.loadMovie();
+                    _upcomingViewModel.loadMovie();
                   });
                 });
 
@@ -78,7 +76,7 @@ class _MovieViewState extends State<MovieView> {
                           var movie = snapshot.data[index];
 
                           if (index == snapshot.data.length - 1) {
-                            _controller.nextPage();
+                            _upcomingViewModel.nextPage();
                           }
 
                           return MovieCardComponent(

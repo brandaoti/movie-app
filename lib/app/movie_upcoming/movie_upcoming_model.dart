@@ -3,13 +3,13 @@ import '../../../data/repositories/repository_api.dart';
 import '../../../data/storage/internal_storage.dart';
 import '../../../data/storage/shared_preferences.dart';
 
-class MovieModel {
+class UpcomingModel {
   final RepositoryApi repositoryApi;
   Future<MovieResponse> movies; // Variavel para Unit test
 
   InternalStorageAdapter internalStorage;
 
-  MovieModel({
+  UpcomingModel({
     this.repositoryApi = const RepositoryApi(),
     InternalStorageAdapter adapter,
   }) : internalStorage = adapter ?? SharedPreferencesAdapter();

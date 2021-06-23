@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_app/app/screens/movie/movie_model.dart';
+import 'package:movie_app/app/movie_upcoming/movie_upcoming_model.dart';
 
 import 'package:movie_app/data/models/movie.dart';
 import 'package:movie_app/data/models/movie_response.dart';
@@ -8,7 +8,7 @@ import 'package:movie_app/data/repositories/repository_api.dart';
 void main() {
   test('FecthMovie, testa o valor da variavel movie', () {
     //
-    final model = MovieModel(repositoryApi: MokeAPI());
+    final model = UpcomingModel(repositoryApi: MokeAPI());
     final page = 0;
     model.getMovie(page);
 

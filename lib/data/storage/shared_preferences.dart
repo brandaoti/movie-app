@@ -1,5 +1,6 @@
-import 'internal_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'internal_storage.dart';
 
 class SharedPreferencesAdapter extends InternalStorageAdapter {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();

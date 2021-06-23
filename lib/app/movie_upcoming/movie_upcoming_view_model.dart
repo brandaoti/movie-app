@@ -2,10 +2,10 @@ import 'dart:async';
 
 import '../../../data/models/movie.dart';
 
-import 'movie_model.dart';
+import 'movie_upcoming_model.dart';
 
-class ViewModel {
-  final _model = MovieModel();
+class UpcomingViewModel {
+  final _model = UpcomingModel();
 
   StreamController<List<Movie>> _streamController = StreamController.broadcast();
   List<Movie> movieList = [];
