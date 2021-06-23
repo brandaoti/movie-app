@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/pages/movie/movie_view.dart';
-import 'package:movie_app/app/shared/components/back_poster_slider.dart';
 
-class HomePage extends StatelessWidget {
-  // const HomePage({Key key}) : super(key: key);
+import '../../movie_upcoming/movie_upcoming.dart';
+import '../../shared/components/movie_carousel_slider.dart';
 
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cubos Academy'),
-        centerTitle: true,
         elevation: 0,
+        title: Text('Cubos Academy'),
+        leading: Container(
+          margin: EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/logo.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+        centerTitle: true,
         brightness: Brightness.dark,
         // backgroundColor: Colors.transparent,
       ),
@@ -22,8 +28,8 @@ class HomePage extends StatelessWidget {
             gradient: LinearGradient(
               colors: [
                 Color(0xFF020024),
-                Color(0xFF48496a),
-                Color(0xFF7f7f8c),
+                Color(0xFF1C1A44),
+                Color(0xFF4E4C61),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -32,11 +38,11 @@ class HomePage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Container(child: BackPosterSlider()),
+              Container(child: MovieCarouselSlider()),
               Expanded(
                 child: ListView(
                   children: [
-                    MovieView(),
+                    MovieUpcoming(),
                   ],
                 ),
               ),

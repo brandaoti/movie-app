@@ -1,13 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../data/models/movie.dart';
 
-import 'movie_model.dart';
+import 'movie_upcoming_model.dart';
 
-class ViewModel {
-  final _model = MovieModel();
+class UpcomingViewModel {
+  final _model = UpcomingModel();
 
   StreamController<List<Movie>> _streamController = StreamController.broadcast();
   List<Movie> movieList = [];
@@ -28,11 +26,3 @@ class ViewModel {
     loadMovie();
   }
 }
-
-// saveFavorite(int id, Movie movie) {
-//   _model.saveMovie(id, movie);
-// }
-
-// removeFavorite(int id) {
-//   _model.removeMovie(id);
-// }

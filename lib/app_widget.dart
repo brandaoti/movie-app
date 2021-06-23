@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:movie_app/app/pages/detail/detail_view.dart';
-import 'package:movie_app/app/shared/routes/app_routes.dart';
 
-import 'pages/home_page.dart';
+import 'app/screens/home/home_screen.dart';
+import 'app/screens/movie_details/movie_detail.dart';
+import 'app/shared/routes/app_routes.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -20,8 +20,8 @@ class AppWidget extends StatelessWidget {
         accentColor: Color(0xFF3f3e57),
       ),
       routes: {
-        AppRoutes.HOME_PAGE: (context) => HomePage(),
-        AppRoutes.MOVIE_DETAIL: (context) => MovieDetailsView(),
+        AppRoutes.HOME_PAGE: (context) => HomeScreen(),
+        AppRoutes.MOVIE_DETAIL: (context) => MovieDetailScreen(),
       },
     );
   }

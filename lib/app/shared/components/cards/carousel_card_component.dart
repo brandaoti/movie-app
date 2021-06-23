@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BackPosterCardComponent extends StatelessWidget {
+class CarouselCardComponent extends StatelessWidget {
   final String backPoster;
   final String title;
 
-  const BackPosterCardComponent({
+  const CarouselCardComponent({
     Key key,
     this.backPoster,
     this.title = 'Nenhum Titulo encontrado',
@@ -17,11 +17,11 @@ class BackPosterCardComponent extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width,
+          width: _size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(backPoster),
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
             ),
           ),
         ),
@@ -31,11 +31,11 @@ class BackPosterCardComponent extends StatelessWidget {
               colors: [
                 Color(0xFF020024).withOpacity(0.0),
                 Color(0xFF3f3e57).withOpacity(0.0),
-                Color(0xFF3f3e57).withOpacity(0.9),
+                Color(0xFF3f3e57).withOpacity(1),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              stops: [0.0, 0.95, 1.0],
+              stops: [0.0, 0.98, 1.0],
             ),
           ),
         ),

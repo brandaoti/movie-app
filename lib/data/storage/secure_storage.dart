@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:movie_app/app/shared/storage/internal_storage.dart';
+
+import 'internal_storage.dart';
 
 class SecureStorage extends InternalStorageAdapter {
   final FlutterSecureStorage _storage = FlutterSecureStorage();
@@ -23,5 +23,5 @@ class SecureStorage extends InternalStorageAdapter {
   }
 
   @override
-  void toggleFavorite(Movie movie) {}
+  void toggleFavorite(int movieID) {}
 }
