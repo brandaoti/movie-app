@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/app/shared/routes/app_routes.dart';
 import 'package:page_indicator/page_indicator.dart';
 
 import '../../../data/models/movie.dart';
@@ -65,9 +66,18 @@ class _MovieCarouselSliderState extends State<MovieCarouselSlider> {
                 itemBuilder: (context, index) {
                   var movie = snapshot.data[index];
 
-                  return CarouselCardComponent(
-                    backPoster: movie.backdropPath,
-                    title: movie.title,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.MOVIE_DETAIL,
+                        arguments: movie.id,
+                      );
+                    },
+                    child: CarouselCardComponent(
+                      backPoster: movie.backdropPath,
+                      title: movie.title,
+                    ),
                   );
                 },
               ),
