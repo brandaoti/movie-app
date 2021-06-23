@@ -17,11 +17,11 @@ class CarouselCardComponent extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width,
+          width: _size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(backPoster),
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
             ),
           ),
         ),

@@ -15,11 +15,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var _size = MediaQuery.of(context).size;
 
-    final movieID = ModalRoute.of(context).settings.arguments as int;
+    final _movieID = ModalRoute.of(context).settings.arguments as int;
 
-    _detailViewModel.loadMovieDetail(movieID);
+    _detailViewModel.loadMovieDetail(_movieID);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,8 +59,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     children: [
                       // * Container para mostrar imagem
                       Container(
-                          height: 500,
-                          width: size.width,
+                          height: _size.height * .6,
+                          width: _size.width,
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage(details.posterPath),
@@ -73,12 +73,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               gradient: LinearGradient(
                                 colors: [
                                   Color(0xFF020024).withOpacity(0.0),
-                                  Color(0xFF3f3e57).withOpacity(.1),
+                                  Color(0xFF3f3e70).withOpacity(0.0),
                                   Color(0xFF4E4C61).withOpacity(1),
                                 ],
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
-                                stops: [0.0, 0.9, 1.0],
+                                stops: [0.0, 0.99, 1.0],
                               ),
                             ),
                           )),
@@ -92,7 +92,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Container(
-                                    width: size.width,
+                                    width: _size.width,
                                     child: Text(
                                       details.title,
                                       style: TextStyle(
@@ -231,7 +231,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 ),
                 onPressed: () {
                   setState(() {
-                    _detailViewModel.toggleFavorite(movieID);
+                    _detailViewModel.toggleFavorite(_movieID);
                   });
                 },
               );
