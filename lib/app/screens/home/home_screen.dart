@@ -8,9 +8,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cubos Academy'),
-        centerTitle: true,
         elevation: 0,
+        title: Text('Cubos Academy'),
+        leading: Container(
+          margin: EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/logo.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+        centerTitle: true,
         brightness: Brightness.dark,
         // backgroundColor: Colors.transparent,
       ),
