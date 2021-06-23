@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/pages/detail/movie_detail_view_model.dart';
-import 'package:movie_app/app/pages/movie/movie_model.dart';
-import 'package:movie_app/app/pages/movie/movie_view_model.dart';
-import 'package:movie_app/app/shared/storage/shared_preferences.dart';
-import '../../shared/models/movie.dart';
+import '../../../data/models/movie.dart';
 
-class MovieDetailsView extends StatefulWidget {
+import 'movie_detail_view_model.dart';
+
+class MovieDetailScreen extends StatefulWidget {
   @override
-  _MovieDetailsViewState createState() => _MovieDetailsViewState();
+  _MovieDetailScreenState createState() => _MovieDetailScreenState();
 }
 
-class _MovieDetailsViewState extends State<MovieDetailsView> {
+class _MovieDetailScreenState extends State<MovieDetailScreen> {
   final _detailViewModel = MovieDetailViewModel();
 
   IconData favorites;
@@ -56,9 +54,6 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
 
               default:
                 if (snapshot.hasData) {
-                  // favorites =
-                  //     _detailViewModel.favorites != null ? Icons.favorite : Icons.favorite_border;
-
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

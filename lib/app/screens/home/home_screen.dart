@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/pages/movie/movie_view.dart';
-import 'package:movie_app/app/shared/components/back_poster_slider.dart';
 
-class HomePage extends StatelessWidget {
-  // const HomePage({Key key}) : super(key: key);
+import '../../movie_upcoming/movie_upcoming.dart';
+import '../../shared/components/movie_carousel_slider.dart';
 
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,11 +31,11 @@ class HomePage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Container(child: BackPosterSlider()),
+              Container(child: MovieCarouselSlider()),
               Expanded(
                 child: ListView(
                   children: [
-                    MovieView(),
+                    MovieUpcoming(),
                   ],
                 ),
               ),

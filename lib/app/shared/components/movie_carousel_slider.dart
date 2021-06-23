@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/pages/movie/movie_view_model.dart';
-import 'package:movie_app/app/shared/components/cards/back_slider_card_component.dart';
-import 'package:movie_app/app/shared/components/loadings/loading_progress_component.dart';
-import 'package:movie_app/app/shared/models/movie.dart';
-import 'package:movie_app/app/shared/models/movie_response.dart';
 import 'package:page_indicator/page_indicator.dart';
 
-class BackPosterSlider extends StatefulWidget {
-  BackPosterSlider({Key key}) : super(key: key);
+import '../../../data/models/movie.dart';
+import '../../movie_upcoming/movie_upcoming_view_model.dart';
+import 'cards/carousel_card_component.dart';
+import 'loadings/loading_progress_component.dart';
+
+class MovieCarouselSlider extends StatefulWidget {
+  MovieCarouselSlider({Key key}) : super(key: key);
 
   @override
-  _BackPosterSliderState createState() => _BackPosterSliderState();
+  _MovieCarouselSliderState createState() => _MovieCarouselSliderState();
 }
 
-class _BackPosterSliderState extends State<BackPosterSlider> {
-  final _controller = ViewModel();
+class _MovieCarouselSliderState extends State<MovieCarouselSlider> {
+  final _getUpcoming = UpcomingViewModel();
   final _pageController = PageController();
 
   @override
   void initState() {
     super.initState();
-    _controller.loadMovie();
+    _getUpcoming.loadMovie();
   }
 
   @override
@@ -32,7 +32,7 @@ class _BackPosterSliderState extends State<BackPosterSlider> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Movie>>(
-      stream: _controller.stream,
+      stream: _getUpcoming.stream,
       builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
@@ -66,7 +66,7 @@ class _BackPosterSliderState extends State<BackPosterSlider> {
                     itemBuilder: (context, index) {
                       var movie = snapshot.data[index];
 
-                      return BackPosterCardComponent(
+                      return CarouselCardComponent(
                         backPoster: movie.backdropPath,
                         title: movie.title,
                       );

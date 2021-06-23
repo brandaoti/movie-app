@@ -1,4 +1,4 @@
-import 'package:movie_app/app/shared/models/movie.dart';
+import 'movie.dart';
 
 class MovieResponse {
   List<Movie> movies;
@@ -13,9 +13,5 @@ class MovieResponse {
     movies = tempList.map((item) {
       return Movie.fromJson(item);
     }).toList();
-
-    // movies = (json['results'] as List).map((item) {
-    //   return Movie.fromJson(item);
-    // }).toList();
   }
 }

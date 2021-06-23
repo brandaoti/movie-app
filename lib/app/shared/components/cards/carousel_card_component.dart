@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BackPosterCardComponent extends StatelessWidget {
+class CarouselCardComponent extends StatelessWidget {
   final String backPoster;
   final String title;
 
-  const BackPosterCardComponent({
+  const CarouselCardComponent({
     Key key,
     this.backPoster,
     this.title = 'Nenhum Titulo encontrado',
