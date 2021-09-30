@@ -1,6 +1,6 @@
 ![](https://i.imgur.com/xG74tOh.png)
 
-# Flutter | Módulo 01 - Desafio
+# Flutter | Módulo 02 - Desafio final
 
 <h1 align="center">
 
@@ -26,10 +26,9 @@
 
 <p align="center">
   <br>
-  <img src="github/screenshots/home.png" alt="demo" height="500">
-  <img src="github/screenshots/details.png" alt="demo" height="500">
-  <img src="github/screenshots/loading.png" alt="demo" height="500">
-  <img src="github/screenshots/error.png" alt="demo" height="500">
+  <img src="github/screenshots/flutter_01.png" alt="demo" height="500">
+  <img src="github/screenshots/flutter_02.png" alt="demo" height="500">
+  <img src="github/screenshots/flutter_03.png" alt="demo" height="500">
 </p>
 
 
@@ -40,19 +39,19 @@
 
 * Projeto criado com objetivo de desenvolver habilidades no desenvolvimento de aplicativos com Flutter.
 * Minha principal dificuldade no desenvolvimento do projeto, foi fazer a recuperação dos dados para serem exibidos na tela.
-* Foi usado estrutura `MVC + SetState` no projeto.
+* Foi usado estrutura ~~`MVC + SetState`~~ **_`MVVM+SetState`_** no projeto.
 * OBS: Este projeto, não foi otimizado para IOs, porém pode rodar normalmente.
 
 - **[THE MOVIE DB: Api](https://developers.themoviedb.org/3/getting-started/introduction)** - Foi usado API na requisição da lista de filmes, para serem consumidas no APP. 
 
 <hr />
 
-## **Em breve:**
+## **New features:**
 [//]: # (Descreva aqui se o app ainda esta em contrução:)
 
-* Feature `MVVM`
-* Feature `Streams`
-* Feature `Paginação`
+* **Feature `MVVM`**
+* **Feature `Streams`**
+* **Feature `Paginação`**
 
 <hr />
 
